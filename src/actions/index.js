@@ -4,6 +4,7 @@ export const START_FETCHING = "START_FETCHING";
 
 export const FETCH_TOOLLIST_SUCCESS = "FETCH_TOOLLIST_SUCCESS";
 export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
+export const FETCH_EDITUSER_SUCCESS = "FETCH_EDITUSER_SUCCESS";
 
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
@@ -22,5 +23,14 @@ export const fetchLoggedUser = (id) => dispatch => {
     axiosWithAuth()
     .get(`http://url:port/api/user${id}`)
     .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res }) & console.log(res, "Data returned from fetchLoggedUser action and set to state."))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
+}
+export const fetchEditUser = (obj) => dispatch => {
+    // fetchEditUser is invokes with new user's object parameters
+    dispatch({ type: START_FETCHING });
+    axiosWithAuth()
+    .put(`http://url:port/api/register/${obj.id}`)
+    // obj callback will be sent into the action.payload instead of the endpoint's response data
+    .then(res => dispatch({ type: FETCH_EDITUSER_SUCCESS, payload: obj }) & console.log(res, "Data returned from fetchEditUser action and set to state. No data in response required. You should change loggedUser in redux store to reflect the object sent."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }

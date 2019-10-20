@@ -29,6 +29,13 @@ const reducer = (state = initialState, action) => {
                 error: "",
                 loggedUser: action.payload
             }
+        case FETCH_EDITUSER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                error: "",
+                loggedUser: action.payload
+            }
         case FETCH_FAILURE:
             return {
                 ...state,
