@@ -15,7 +15,7 @@ function Home(props) {
                 </form>
             </div>
             <div className="featured-products-categories" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                <div className="featured-products" style={{ height: '65vh', width: '80vw', paddingTop: 25, backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                <div className="featured-products" style={{ height: '65vh', width: '80vw', alignItems: 'center', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                     {/* Replace divs below with card components getting props from state passed down */}
                     <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
                     <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />

@@ -15,7 +15,7 @@ function ToolList(props) {
                 </form>
             </div>
             {/* Featured listings appear below. Search submissions will filter the featured listings */}
-            <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', paddingTop: 25 }}>
+            <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                 {/* The four div elements below will be removed. This is just shows how 4 tool cards will be positioned. */}
                 <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
                 <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
