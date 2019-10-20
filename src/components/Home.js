@@ -7,6 +7,7 @@ function Home(props) {
 
     return (
         <>
+            <h2>Home</h2>
             <div className="hero-search" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue' }}>
                 <form>
                     {/* handleChange and onSubmit will need to be added */}
