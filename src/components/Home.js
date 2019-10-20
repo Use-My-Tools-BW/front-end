@@ -7,7 +7,7 @@ function Home(props) {
 
     return (
         <>
-            <div className="hero-search" style={{ height: '100vh', width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue' }}>
+            <div className="hero-search" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue' }}>
                 <form>
                     {/* handleChange and onSubmit will need to be added */}
                     <input type="text"/>
