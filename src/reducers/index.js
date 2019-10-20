@@ -1,7 +1,7 @@
-import { START_FETCHING, FETCH_SUCCESS, FETCH_FAILURE } from "../actions"
+import { START_FETCHING, FETCH_TOOLLIST_SUCCESS, FETCH_FAILURE } from "../actions"
 
 const initialState = {
-    user: [],
+    tools: [],
     isFetching: false,
     error: ""
 };
@@ -14,12 +14,12 @@ const reducer = (state = initialState, action) => {
                 isFetching: true,
                 error: ""
             }
-        case FETCH_SUCCESS:
+        case FETCH_TOOLLIST_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 error: "",
-                user: action.payload
+                tools: action.payload
             }
         case FETCH_FAILURE:
             return {
