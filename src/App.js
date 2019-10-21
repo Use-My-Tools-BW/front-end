@@ -9,14 +9,14 @@ import Home from "./components/Home";
 import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
-import EditAccount from "./components/forms/EditAccountForm"
+
 function App() {
   return (
     <div className="App">
 
         <Route exact path="/" component={Login}/>
         <Route exact path="/register" component={RegisterForm}/>
-      <EditAccount/>
+
       <Home />
       <ToolList />
       <Account />
