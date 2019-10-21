@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "./utils/axiosWithAuth"
-import { Form, Message } from 'semantic-ui-react';
 
 const Login = props => {
     const [login, setLogin] = useState({username: "", password: ""})
@@ -29,7 +28,7 @@ const Login = props => {
     return (
         <div>
             <h1>Use My Tools</h1>
-            <Form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <input
                 type="text"
                 name="username"
@@ -45,11 +44,11 @@ const Login = props => {
                 placeholder="Password"
                 />
                 <button type="submit">Log In</button>
-            </Form>
+            </form>
             <div>
-                <Message>
+                <p>
                     Don't have an account?  <Link to='/register'>Register Now</Link>
-                </Message>
+                </p>
             </div>
         </div>
     )

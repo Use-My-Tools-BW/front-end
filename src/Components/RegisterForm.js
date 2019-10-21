@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Form } from 'semantic-ui-react';
 import axios from 'axios';
 
 export default function RegisterForm(props) {
@@ -28,7 +27,7 @@ export default function RegisterForm(props) {
     return (
         <div>
             <h1>Register</h1>
-            <Form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler}>
                 <input
                 type="text"
                 name="username"
@@ -54,7 +53,7 @@ export default function RegisterForm(props) {
                 required
                 />
                 <button type="submit">Register</button>
-            </Form>
+            </form>
         </div>
     )
     
