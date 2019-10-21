@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 
 const Login = props => {
-    const [login, setLogin] = useState({username: "", password: ""})
+    const [login, setLogin] = useState({email: "", password: ""})
 
     const handleChange = e => {
         setLogin({...login, [e.target.name]: e.target.value})
@@ -11,18 +11,16 @@ const Login = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        setLogin({username: "", password: ""})
-
-        axiosWithAuth().post("/login", login)
+        console.log(login)
+        axiosWithAuth()
+        .post("/api/auth/login", login)
         .then(res => {
             console.log(res)
             localStorage.setItem("token", res.data.token)
-            localStorage.setItem("id", res.data.id)
-
             //if, else to route proper login (props)
         })
         .catch(err => console.log(err))
-        setLogin({username: "", password: ""})
+        setLogin({email: "", password: ""})
     }
 
     return (
@@ -31,7 +29,7 @@ const Login = props => {
             <form onSubmit={handleSubmit}>
                 <input
                 type="text"
-                name="username"
+                name="email"
                 value={login.username}
                 onChange={handleChange}
                 placeholder="Username"

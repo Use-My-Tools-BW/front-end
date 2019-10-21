@@ -3,19 +3,23 @@ import axios from 'axios';
 
 export default function RegisterForm(props) {
     const [userCredentials, setCredentials] = useState ({
-        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
         password: "",
-        email: ""
+        city: "",
+        state: "",
+        zip: "",
     });
 
     const submitHandler = event => {
         event.preventDefault();
         console.log(userCredentials);
 
-        axios.post("", userCredentials, {headers: {"Content-Type": "application/json"}})  //Ready for backend
+        axios.post("https://usemytoolsbw.herokuapp.com/api/auth/register", userCredentials, {headers: {"Content-Type": "application/json"}})  //Ready for backend
             .then(res => {
                 console.log(res);
-                props.history.push("/");
+                // props.history.push("/");
             })
             .catch(err => console.log(err.response))
     }
@@ -30,18 +34,18 @@ export default function RegisterForm(props) {
             <form onSubmit={submitHandler}>
                 <input
                 type="text"
-                name="username"
-                value={userCredentials.username}
+                name="first_name"
+                value={userCredentials.first_name}
                 onChange={changeHandler}
-                placeholder="Username"
+                placeholder="First Name"
                 required
                 />
                 <input
-                type="password"
-                name="password"
-                value={userCredentials.password}
+                type="text"
+                name="last_name"
+                value={userCredentials.last_name}
                 onChange={changeHandler}
-                placeholder="Password"
+                placeholder="Last Name"
                 required
                 />
                 <input
@@ -52,6 +56,39 @@ export default function RegisterForm(props) {
                 placeholder="Email"
                 required
                 />
+                <input
+                type="text"
+                name="city"
+                value={userCredentials.city}
+                onChange={changeHandler}
+                placeholder="City"
+                required
+                />
+                <input
+                type="text"
+                name="state"
+                value={userCredentials.state}
+                onChange={changeHandler}
+                placeholder="City"
+                required
+                />
+                <input
+                type="number"
+                name="zip"
+                value={userCredentials.zip}
+                onChange={changeHandler}
+                placeholder="Zip"
+                required
+                />
+                <input
+                type="password"
+                name="password"
+                value={userCredentials.password}
+                onChange={changeHandler}
+                placeholder="Password"
+                required
+                />
+
                 <button type="submit">Register</button>
             </form>
         </div>
