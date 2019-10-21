@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
+import PostListingForm from './components/forms/PostListingForm';
 
 
 function App() {
@@ -16,8 +17,13 @@ function App() {
     <div className="App">
 
         <Route exact path="/" component={Login}/>
+
+      
+
         <Route exact path="/" component={RegisterForm}/>
 
+
+      <PostListingForm />
       <Home />
       <ToolList />
       <Account />
