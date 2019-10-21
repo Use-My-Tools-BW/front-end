@@ -14,7 +14,7 @@ export default function EditAccountForm(props){
         event.preventDefault();
         console.log(userCredentials);
 
-        axios.put("", userCredentials, {headers: {"Content-Type": "application/json"}})  //Ready for backend
+        axios.put("", userCredentials, {headers: {"Content-Type": "application/json"}})  
             .then(res => {
                 console.log(res);
                 props.history.push("/");

@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
+import PostListingForm from './components/forms/PostListingForm';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route exact path="/register" component={RegisterForm}/>
       
 
-
+      <PostListingForm />
       <Home />
       <ToolList />
       <Account />

@@ -23,7 +23,7 @@ const submitHandler = event => {
     event.preventDefault();
     console.log(toolList);
 
-    axios.put("", toolList, {headers: {"Content-Type": "application/json"}})  //Ready for backend
+    axios.put("https://reqres.in/api/users", toolList )  
         .then(res => {
             console.log(res);
             props.history.push("/");
