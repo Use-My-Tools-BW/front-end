@@ -3,7 +3,8 @@ import './App.css';
 
 import Home from "./components/Home";
 import ToolList from "./components/ToolList";
-import Account from "./components/Account"
+import Account from "./components/Account";
+import Confirmation from "./components/Confirmation";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Home />
       <ToolList />
       <Account />
+      <Confirmation />
     </div>
   );
 }
