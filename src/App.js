@@ -9,8 +9,7 @@ import Home from "./components/Home";
 import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
-import EditAccountForm from "./components/forms/PostListingForm"
-import PostListingForm from './components/forms/PostListingForm';
+
 function App() {
   return (
     <div className="App">
@@ -19,7 +18,7 @@ function App() {
         <Route exact path="/register" component={RegisterForm}/>
       
 
-      <PostListingForm/>
+   
       <Home />
       <ToolList />
       <Account />

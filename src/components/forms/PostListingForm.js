@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-
-export default function PostListingForm(){
+export default function PostListingForm(props){
 const [toolList, setToolList] = useState({
 
-    active: false ,
+    active: false || true ,
     listingTitle: "",
     model:"",
     manufacturer: "",
@@ -18,6 +18,23 @@ const [toolList, setToolList] = useState({
 });
 
 
+
+const submitHandler = event => {
+    event.preventDefault();
+    console.log(toolList);
+
+    axios.post("", toolList, {headers: {"Content-Type": "application/json"}})  //Ready for backend
+        .then(res => {
+            console.log(res);
+            props.history.push("/");
+        })
+        .catch(err => console.log(err.response))
+}
+
+
+
+
+
 const changeHandler = event => {
     setToolList({ ...toolList, [event.target.name]: event.target.value })
 }
@@ -27,11 +44,11 @@ const changeHandler = event => {
 return ( 
     <div>
         <h1>Post Your Tools!</h1>
-        <form>
+        <form onSubmit ={submitHandler}>
             <label>
                 Active?
                 <input
-                type = "checkbox" name = "active" checked = {toolList.active}
+                type = "checkbox" name = "active"  value ={toolList.active}
                 />
             </label>
             <label>
@@ -48,7 +65,7 @@ return (
                 <input 
                 type = "text"
                 name="model"
-                value={toolList.listingTitle}
+                value={toolList.model}
                 onChange={changeHandler}
                 />
             </label>
@@ -57,7 +74,7 @@ return (
                 <input 
                 type = "text"
                 name="manufacturer"
-                value={toolList.listingTitle}
+                value={toolList.manufacturer}
                 onChange={changeHandler}
                 />
             </label>
@@ -66,7 +83,7 @@ return (
                 <input 
                 type = "text"
                 name="category"
-                value={toolList.listingTitle}
+                value={toolList.category}
                 onChange={changeHandler}
                 />
             </label>
@@ -75,7 +92,7 @@ return (
                 <input 
                 type = "date"
                 name="dateStart"
-                value={toolList.listingTitle}
+                value={toolList.dateStart}
                 onChange={changeHandler}
                 />
             </label>
@@ -84,7 +101,7 @@ return (
                 <input 
                 type = "date"
                 name="dateEnd"
-                value={toolList.listingTitle}
+                value={toolList.dateEnd}
                 onChange={changeHandler}
                 />
             </label>
@@ -93,7 +110,7 @@ return (
                 <input 
                 type = "text"
                 name="condition"
-                value={toolList.listingTitle}
+                value={toolList.condition}
                 onChange={changeHandler}
                 />
             </label>
@@ -102,22 +119,25 @@ return (
                 <input 
                 type = "text"
                 name="totalCost"
-                value={toolList.listingTitle}
+                value={toolList.totalCost}
                 onChange={changeHandler}
                 />
             </label>
 
+         
 
-
-
-
-
-
+            <div className = "img-container">
+                <label>
+                    Upload Your Img:
+                <input className ="fileInput"
+                type ="file"
+                onChange={changeHandler}
+                value ={toolList.listingImg}
+                />
+                </label>
+            </div>
+            <button type ="submit">Upload Your Item</button>
         </form>
-
-
-
-
     </div>
 )
 
