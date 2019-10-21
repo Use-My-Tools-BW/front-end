@@ -1,11 +1,11 @@
-availableTools = [
+export const availableTools = [
     {
         id: 12,
         active: true,
         listingtitle: "Dewalt Lithium-Ion Cordless Reciprocating Saw",
         model: "DCS380B",
         manufacturer: "Dewalt",
-        lendSpanDays:
+        lendSpan:
         {
             dateStart: "11/21/2019",
             dateEnd: "11/28/2019"
@@ -85,7 +85,7 @@ availableTools = [
     }
 ]
 
-loggedUser = {
+export const loggedUser = {
     lenderId: 31,
     lenderZip: "90210",
     lenderFeedback: [5,5,5,5,5,4,5,3,5,4,5,4,5,5],
