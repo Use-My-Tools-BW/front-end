@@ -10,12 +10,13 @@ import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
 
+
 function App() {
   return (
     <div className="App">
 
         <Route exact path="/" component={Login}/>
-        <Route exact path="/register" component={RegisterForm}/>
+        <Route exact path="/" component={RegisterForm}/>
 
       <Home />
       <ToolList />
