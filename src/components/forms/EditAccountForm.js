@@ -35,6 +35,7 @@ export default function EditAccountForm(props){
                 name="username"
                 value={userCredentials.username}
                 onChange={changeHandler}
+            
                 />
                 </label>
                 <label>

@@ -58,6 +58,7 @@ return (
                 name="listingTitle"
                 value={toolList.listingTitle}
                 onChange={changeHandler}
+                required
                 />
             </label>
             <label>
@@ -94,6 +95,7 @@ return (
                 name="dateStart"
                 value={toolList.dateStart}
                 onChange={changeHandler}
+                required
                 />
             </label>
             <label>
@@ -103,6 +105,7 @@ return (
                 name="dateEnd"
                 value={toolList.dateEnd}
                 onChange={changeHandler}
+                required
                 />
             </label>
             <label>
@@ -121,6 +124,7 @@ return (
                 name="totalCost"
                 value={toolList.totalCost}
                 onChange={changeHandler}
+                required
                 />
             </label>
 

@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/register" component={RegisterForm}/>
       
 
-   
+
       <Home />
       <ToolList />
       <Account />
