@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 
-export default function EditAccountForm(){
+export default function EditAccountForm(props){
     const [userCredentials, setCredentails] = useState({
 
         username: "",
@@ -9,19 +10,29 @@ export default function EditAccountForm(){
         email:""
 
     });
+    const submitHandler = event => {
+        event.preventDefault();
+        console.log(userCredentials);
 
+        axios.put("", userCredentials, {headers: {"Content-Type": "application/json"}})  //Ready for backend
+            .then(res => {
+                console.log(res);
+                props.history.push("/");
+            })
+            .catch(err => console.log(err.response))
+    }
     const changeHandler = event => {
         setCredentails({ ...userCredentials, [event.target.name]: event.target.value })
     }
     return (
         <div>
             <h1>Edit Your Account</h1>
-            <form>
+            <form onSubmit= {submitHandler}>
                 <label>
                 UserName:
                 <input 
                 type = "text"
-                Name="username"
+                name="username"
                 value={userCredentials.username}
                 onChange={changeHandler}
                 />
@@ -30,8 +41,8 @@ export default function EditAccountForm(){
                Password:
                 <input 
                 type = "password"
-                Name="password"
-                value={userCredentials.username}
+                name="password"
+                value={userCredentials.password}
                 onChange={changeHandler}
                 />
                 </label>
@@ -39,19 +50,13 @@ export default function EditAccountForm(){
                Email:
                 <input 
                 type = "email"
-                Name="email"
-                value={userCredentials.username}
+                name="email"
+                value={userCredentials.email}
                 onChange={changeHandler}
                 />
                 </label>
-                
-
-
-
-
+                <button type ="submit">Edit</button>
             </form>
-
-
         </div>
     )
 }
