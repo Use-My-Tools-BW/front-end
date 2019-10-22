@@ -34,7 +34,7 @@ const classes = useStyles();
   return (
     <footer className ={classes.root}>
       
-      <Link to ="/" ><Button  color="inherit">Home</Button></Link>
+      <Link to ="/" ><Button style={{ textDecoration: 'none' }} >Home</Button></Link>
            <Button  color="inherit">Contact Us</Button>
            <Button  color="inherit">Legal Notices</Button>
            <Button  color="inherit">Terms of use</Button>

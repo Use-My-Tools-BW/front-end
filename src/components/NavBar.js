@@ -15,11 +15,15 @@ root: {
     background: 'black'
 
 },
-NavItem: {
-    marginLeft:'auto'
+NavItems: {
+    marginLeft:'auto',
+    color: 'white'
+},
+
+NavButton: {
+    color: 'white',
+    textDecoration: 'none'
 }
-
-
 })
 
 
@@ -37,11 +41,11 @@ export default function NavBar(){
             <Typography variant="h4">
               Use My Tools
             </Typography>
-            <div className ={classes.NavItem}>
-            <Link to ="/" ><Button  color="inherit">Home</Button></Link>
-            <Link to ="/Post/"> <Button  color="inherit">Post</Button> </Link>
-            <Link to = "/Login/"><Button  color="inherit">Login</Button></Link>
-            <Link to = "/Register/"> <Button  color="inherit">Register</Button></Link>
+            <div className ={classes.NavItems}>
+            <Link to ="/" style={{ textDecoration: 'none' }} ><Button className ={classes.NavButton} >Home</Button></Link>
+            <Link to ="/Post/" style={{ textDecoration: 'none' }}> <Button  className ={classes.NavButton}>Post</Button> </Link>
+            <Link to = "/Login/"style={{ textDecoration: 'none' }} ><Button className ={classes.NavButton} >Login</Button></Link>
+            <Link to = "/Register/" style={{ textDecoration: 'none' }}> <Button className ={classes.NavButton}>Register</Button></Link>
             </div>
           </Toolbar>
         </AppBar>
