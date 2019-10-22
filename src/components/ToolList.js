@@ -62,12 +62,12 @@ class ToolList extends React.Component {
                         <button type="submit">Search</button>
                     </form>
                 </div> */}
-                <FilterSearch/>
+                <FilterSearch tools={this.props.tools}/>
                 <button type="submit">Search</button>
                 {/* Featured listings appear below. Search submissions will filter the featured listings */}
                 <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {/* The four div elements below will be removed. This is just shows how 4 tool cards will be positioned. */}
-                    {this.props.tools.slice(0, 4).map(e =>
+                    {this.props.tools.map(e =>
                         <Card style={{ width:"35%", height:"45%", margin:20 }}>
                             <CardActionArea>
                                 <img width="25%" src={e.img_url} />
