@@ -6,15 +6,17 @@ import { fetchToolListings } from "../actions";
 
 import FilterSearch from './FilterSearch';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 class ToolList extends React.Component {
-    state = {
-        name: '',
-        model: '',
-        manufacturer: '',
-        category: '',
-        condition: '',
-        price: '',
-    }
+    
 
     componentDidMount() {
         this.props.fetchToolListings();
@@ -44,6 +46,8 @@ class ToolList extends React.Component {
         })
     }
 
+    // classes = useStyles();
+
     // A useState() hook will need to be used here to hold filtered search results
    render() {
     return (
@@ -63,10 +67,21 @@ class ToolList extends React.Component {
                 {/* Featured listings appear below. Search submissions will filter the featured listings */}
                 <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {/* The four div elements below will be removed. This is just shows how 4 tool cards will be positioned. */}
-                    <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
-                    <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
-                    <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
-                    <div style={{ height: '45%', width: '45%', backgroundColor: 'green' }} />
+                    {this.props.tools.slice(0, 4).map(e =>
+                        <Card style={{ width:"35%", height:"45%", margin:20 }}>
+                            <CardActionArea>
+                                <img width="25%" src={e.img_url} />
+                                <CardContent>
+                                    <Typography component="h2">{e.title}</Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
+                                <Button variant="contained" color="primary">View</Button>
+                                <Button variant="contained" color="secondary">Rent</Button>
+                            </CardActions>
+                        </Card>
+                        )}
                 </div>
             </div>
         </>

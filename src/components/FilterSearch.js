@@ -2,8 +2,7 @@ import React from 'react';
 
 export default class FilterSearch extends React.Component {
     state = {
-        initialItems: [],
-        items: []
+        items: this.props.tools
     }
 
     filterList = (event) => {
