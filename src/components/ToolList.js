@@ -50,6 +50,7 @@ class ToolList extends React.Component {
                     </form>
                 </div> */}
                 <FilterSearch/>
+                <button type="submit">Search</button>
                 {/* Featured listings appear below. Search submissions will filter the featured listings */}
                 <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {/* The four div elements below will be removed. This is just shows how 4 tool cards will be positioned. */}

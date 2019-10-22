@@ -27,7 +27,7 @@ export default class FilterSearch extends React.Component {
                 <form>
                     <input
                     type="text"
-                    placeholder="Search"
+                    placeholder="Enter Tool Name"
                     onChange={this.filterList}/>
                 </form>
             <div>
