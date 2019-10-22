@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Swiper from 'react-id-swiper';
@@ -44,6 +44,10 @@ const params = {
 /////////////////////////// Material-UI End
 
 function Home(props) {
+    useEffect(() => {
+        props.fetchToolListings();
+      }, []);
+
     const classes = useStyles();
 
     return (
@@ -65,13 +69,13 @@ function Home(props) {
                     </Swiper>
                 </div>
                 <div className="featured-products" style={{ height: '80vh', width: '80vw', alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    {availableTools.slice(0, 4).map(e =>
+                    {props.tools.slice(0, 4).map(e =>
                         <Card className={classes.card}>
                             <CardActionArea>
-                                <img width="25%" src={e.listingImg} />
+                                <img width="25%" src={e.img_url} />
                                 <CardContent>
-                                    <Typography component="h2">{e.listingtitle}</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                    <Typography component="h2">{e.title}</Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
                                 </CardContent>
                             </CardActionArea>
                             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
