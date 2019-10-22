@@ -2,6 +2,8 @@ import React from 'react';
 import { addTool } from '../actions';
 import { connect } from "react-redux";
 
+import { fetchToolListings } from "../actions";
+
 import FilterSearch from './FilterSearch';
 
 class ToolList extends React.Component {
@@ -12,7 +14,14 @@ class ToolList extends React.Component {
         category: '',
         condition: '',
         price: '',
+    }
 
+    componentDidMount() {
+        this.props.fetchToolListings();
+        console.log("Component did mount at ToolList", this.props)
+    }
+    componentDidUpdate() {
+        console.log("Component did update at ToolList", this.props)
     }
 
     handleChange = e => {
@@ -75,5 +84,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { addTool }
+    { addTool, fetchToolListings }
 )(ToolList)
