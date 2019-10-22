@@ -82,7 +82,8 @@ export const availableTools = [
             lenderZip: "90210",
             lenderFeedback: [5,5,5,5,5,4,5,3,5,4,5,4,5,5]
         }
-    }
+    },
+    
 ]
 
 export const loggedUser = {
@@ -133,3 +134,82 @@ export const loggedUser = {
         }
     ]
 }
+
+export const toolCategories = [
+    {
+        name: "Power Drills",
+        class: "iconify",
+        dataIcon: "whh:drill",
+    },
+    {
+        name: "Power Saws",
+        class: "iconify",
+        dataIcon: "mdi:circular-saw",
+    },
+    {
+        name: "Hand Tools",
+        class: "iconify",
+        dataIcon: "whh:tools",
+    },
+    {
+        name: "Nailers",
+        class: "iconify",
+        dataIcon: "mdi:nail",
+    },
+    {
+        name: "Tool Batteries",
+        class: "iconify",
+        dataIcon: "whh:batterycharged",
+    },
+    {
+        name: "Tool Kits",
+        class: "iconify",
+        dataIcon: "mdi:toolbox",
+    },
+    {
+        name: "Painting",
+        class: "iconify",
+        dataIcon: "ls:paint",
+    },
+    {
+        name: "Automotive",
+        class: "iconify",
+        dataIcon: "maki:car-repair-11",
+    }
+]
+
+export const homeIcons = [
+    {
+        name: "Account",
+        class: "iconify",
+        dataIcon: "ic:baseline-account-box",
+    },
+    {
+        name: "Rent Tools",
+        class: "iconify",
+        dataIcon: "fa-solid:shopping-basket",
+    },
+    {
+        name: "Lend Your Tool",
+        class: "iconify",
+        dataIcon: "ic:round-post-add",
+    },    
+]
+
+export const accountIcons = [
+    {
+        name: "Edit Account",
+        class: "iconify",
+        dataIcon: "ic:baseline-account-box",
+    },
+    {
+        name: "Rent Tools",
+        class: "iconify",
+        dataIcon: "fa-solid:shopping-basket",
+    },
+    {
+        name: "Lend Your Tool",
+        class: "iconify",
+        dataIcon: "ic:round-post-add",
+    },    
+]
