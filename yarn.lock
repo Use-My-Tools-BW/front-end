@@ -1709,7 +1709,14 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fea652f276bc1e7052cc5c5e3c1cca0d5f870f51
+=======
 
+>>>>>>> c82961023f7315a9fbc41408f84e140c07368343
 "@types/react-transition-group@^4.2.0":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.2.3.tgz#4924133f7268694058e415bf7aea2d4c21131470"
@@ -1724,7 +1731,15 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> fea652f276bc1e7052cc5c5e3c1cca0d5f870f51
+=======
+
+>>>>>>> c82961023f7315a9fbc41408f84e140c07368343
 "@types/semver@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-5.5.0.tgz#146c2a29ee7d3bae4bf2fcb274636e264c813c45"
@@ -6954,11 +6969,26 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@~4.0.1:
   dependencies:
     is-extglob "^2.1.1"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fea652f276bc1e7052cc5c5e3c1cca0d5f870f51
+=======
+>>>>>>> c82961023f7315a9fbc41408f84e140c07368343
 is-in-browser@^1.0.2, is-in-browser@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/is-in-browser/-/is-in-browser-1.1.3.tgz#56ff4db683a078c6082eb95dad7dc62e1d04f835"
   integrity sha1-Vv9NtoOgeMYILrldrX3GLh0E+DU=
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> fea652f276bc1e7052cc5c5e3c1cca0d5f870f51
+=======
+
+>>>>>>> c82961023f7315a9fbc41408f84e140c07368343
 is-installed-globally@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/is-installed-globally/-/is-installed-globally-0.1.0.tgz#0dfd98f5a9111716dd535dda6492f67bf3d25a80"
@@ -10907,7 +10937,11 @@ react-error-overlay@^6.0.3:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.3.tgz#c378c4b0a21e88b2e159a3e62b2f531fd63bf60d"
   integrity sha512-bOUvMWFQVk5oz8Ded9Xb7WVdEi3QGLC8tH7HmYP0Fdp4Bn3qw0tRFmr5TW6mvahzvmrK4a6bqWGfCevBflP+Xw==
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> c82961023f7315a9fbc41408f84e140c07368343
 react-id-swiper@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-2.3.2.tgz#acd35e51f1068b94a8066829b121ff9b29febaaa"
@@ -10915,6 +10949,11 @@ react-id-swiper@^2.3.2:
   dependencies:
     object-assign "^4.1.1"
 
+<<<<<<< HEAD
+=======
+>>>>>>> fea652f276bc1e7052cc5c5e3c1cca0d5f870f51
+=======
+>>>>>>> c82961023f7315a9fbc41408f84e140c07368343
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.10.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.10.2.tgz#984120fd4d16800e9a738208ab1fba422d23b5ab"
