@@ -68,11 +68,11 @@ export default function FilterSearch(props) {
                         </Card>
             )}
                 
-                {
+                {/* {
                     queryResults.map(function(item) {
                         return <div>{item.title}</div>
                     })
-                }
+                } */}
             </div>
             </div>
         );
