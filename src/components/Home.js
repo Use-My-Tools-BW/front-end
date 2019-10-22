@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import Swiper from 'react-id-swiper';
+
 /////////////////////////// Material-UI Start
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -12,7 +14,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 /////////////////////////// Material-UI End
 
-import { availableTools } from "../data/data"
+import { availableTools, toolCategories } from "../data/data"
 
 import { fetchToolListings } from "../actions";
 
@@ -26,6 +28,18 @@ const useStyles = makeStyles({
 
     },
   });
+const params = {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+        clickable: true,
+    },
+    autoplay: {
+        delay: 1500,
+        disableOnInteraction: false
+    },
+}
 /////////////////////////// Material-UI End
 
 function Home(props) {
@@ -58,9 +72,12 @@ function Home(props) {
                         </Card>
                         )}
                 </div>
-                <div className="categories" style={{ height: '20vh', width: '80vw', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {/* Slider for categories will be added here. Most likely react-id-swiper (see npm) */}
-                    <div className="slider" style={{ height: '18vh', width: '90%', backgroundColor: 'green' }} />
+                <div className="categories" style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Swiper {...params}>
+                        {toolCategories.map(e =>
+                            <div><span class={e.class} data-icon={e.dataIcon} data-inline="false" style={{ fontSize: "6rem", color: '#312A34'}} /><p>{e.name}</p></div>
+                        )}
+                    </Swiper>
                 </div>
             </div>
             <div className="home-button-icons" style={{ height: '33vh', width: '100%', backgroundColor: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

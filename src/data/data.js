@@ -133,3 +133,42 @@ export const loggedUser = {
         }
     ]
 }
+
+export const toolCategories = [
+    {
+        name: "Power Drills",
+        class: "iconify",
+        dataIcon: "whh:drill",
+    },
+    {
+        name: "Power Saws",
+        class: "iconify",
+        dataIcon: "mdi:circular-saw",
+    },
+    {
+        name: "Hand Tools",
+        class: "iconify",
+        dataIcon: "whh:tools",
+    },
+    {
+        name: "Nailers",
+        class: "iconify",
+        dataIcon: "mdi:nail",
+    },
+    {
+        name: "Tool Batteries",
+        class: "iconify",
+        dataIcon: "whh:batterycharged",
+    },
+    {
+        name: "Tool Kits",
+        class: "iconify",
+        dataIcon: "mdi:toolbox",
+    },
+    {
+        name: "Painting",
+        class: "iconify",
+        dataIcon: "ls:paint",
+    }
+]
+
