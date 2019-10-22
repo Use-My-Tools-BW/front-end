@@ -31,14 +31,14 @@ export default class FilterSearch extends React.Component {
                     onChange={this.filterList}/>
                 </form>
             <div>
-                {
+                {/* {
                     this.state.items.map(function(item) {
-                        return <div key={item}></div>
+                        return <div key={item}>{item}</div>
                     })
-                }
+                } */}
             </div>
             </div>
-        )
+        );
         
     }
-}
+};
