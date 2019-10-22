@@ -65,14 +65,13 @@ function Home(props) {
                     </Swiper>
                 </div>
                 <div className="featured-products" style={{ height: '80vh', width: '80vw', alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    {/* Replace divs below with card components getting props from state passed down */}
-                    {availableTools.map(e =>
+                    {availableTools.slice(0, 4).map(e =>
                         <Card className={classes.card}>
                             <CardActionArea>
                                 <img width="25%" src={e.listingImg} />
                                 <CardContent>
                                     <Typography component="h2">{e.listingtitle}</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
                                 </CardContent>
                             </CardActionArea>
                             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
@@ -84,7 +83,6 @@ function Home(props) {
                 </div>
             </div>
             <div className="home-button-icons" style={{ height: '33vh', width: '100%', backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                {/* Account, Borrow, Lend icon buttons mapped here */}
                 <div className="icons" style={{ width: '60vw', height: '30vh', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center' }}> 
                     {homeIcons.map(e =>
                         <div><span class={e.class} data-icon={e.dataIcon} data-inline="false" style={{ fontSize: "6rem", color: 'white'}} /><p style={{ fontSize: '2.2rem', color: 'white' }}>{e.name}</p></div>
