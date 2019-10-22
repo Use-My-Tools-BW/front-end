@@ -172,7 +172,7 @@ export const toolCategories = [
         dataIcon: "ls:paint",
     },
     {
-        name: "Automotive Tools",
+        name: "Automotive",
         class: "iconify",
         dataIcon: "maki:car-repair-11",
     }
@@ -181,6 +181,24 @@ export const toolCategories = [
 export const homeIcons = [
     {
         name: "Account",
+        class: "iconify",
+        dataIcon: "ic:baseline-account-box",
+    },
+    {
+        name: "Rent Tools",
+        class: "iconify",
+        dataIcon: "fa-solid:shopping-basket",
+    },
+    {
+        name: "Lend Your Tool",
+        class: "iconify",
+        dataIcon: "ic:round-post-add",
+    },    
+]
+
+export const accountIcons = [
+    {
+        name: "Edit Account",
         class: "iconify",
         dataIcon: "ic:baseline-account-box",
     },
