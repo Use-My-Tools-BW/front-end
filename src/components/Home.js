@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Swiper from 'react-id-swiper';
@@ -44,6 +44,11 @@ const params = {
 /////////////////////////// Material-UI End
 
 function Home(props) {
+    
+    useEffect(() => {
+        props.fetchToolListings();
+      }, []);
+
     const classes = useStyles();
 
     return (

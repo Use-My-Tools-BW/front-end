@@ -1,4 +1,5 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 
 export const START_FETCHING = "START_FETCHING";
 
@@ -14,11 +15,9 @@ export const ADD_TOOL_FAILED = "ADD_TOOL_FAILED"
 
 export const fetchToolListings = () => dispatch => {
     dispatch({ type: START_FETCHING });
-    // Shouldnt require axiosWithAuth(), but will try to keep this for uniform code
-    axiosWithAuth()
-    // Change to .get parameter to endpoint that returns user's data based on token being passed in header
-    .get("http://url:port/api/users")
-    .then(res => dispatch({ type: FETCH_TOOLLIST_SUCCESS, payload: res }) & console.log(res, "Data returned from fetchToolListings action and set to state."))
+    axios
+    .get("https://usemytoolsbw.herokuapp.com/api/tools")
+    .then(res => dispatch({ type: FETCH_TOOLLIST_SUCCESS, payload: res.data }) & console.log(res.data, "Data returned from fetchToolListings action and set to state."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
 export const fetchLoggedUser = (id) => dispatch => {
