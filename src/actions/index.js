@@ -8,6 +8,10 @@ export const FETCH_EDITUSER_SUCCESS = "FETCH_EDITUSER_SUCCESS";
 
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
+export const ADD_TOOL = "ADD_TOOL"
+export const ADD_TOOL_SUCCESS = "ADD_TOOL_SUCCESS"
+export const ADD_TOOL_FAILED = "ADD_TOOL_FAILED"
+
 export const fetchToolListings = () => dispatch => {
     dispatch({ type: START_FETCHING });
     // Shouldnt require axiosWithAuth(), but will try to keep this for uniform code
@@ -33,4 +37,17 @@ export const fetchEditUser = (obj) => dispatch => {
     // obj callback will be sent into the action.payload instead of the endpoint's response data
     .then(res => dispatch({ type: FETCH_EDITUSER_SUCCESS, payload: obj }) & console.log(res, "Data returned from fetchEditUser action and set to state. No data in response required. You should change loggedUser in redux store to reflect the object sent."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
+}
+
+export const addTool = newTool => dispatch => {
+    dispatch({ type: ADD_TOOL })
+    axiosWithAuth()
+    .post('', newTool)
+    .then(res => {
+        dispatch({ type: ADD_TOOL_SUCCESS, payload: res.data })
+        console.log(res)
+    })
+    .catch(err => {
+        dispatch({ type: ADD_TOOL_FAILED, payload: err })
+    })
 }

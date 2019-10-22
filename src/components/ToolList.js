@@ -1,9 +1,31 @@
 import React from 'react';
-
+import { addTool } from '../actions'
 import { connect } from "react-redux";
 
-function ToolList(props) {
+class ToolList extends React.Component {
+    state = {
+        name: '',
+        price: '',
+    }
+
+    handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
+    addNewTool = e => {
+        e.preventDefault()
+
+        const newTool = this.state
+        this.props.addTool(newTool)
+
+        this.setState({
+            name: '',
+            price: '',
+        })
+    }
+
     // A useState() hook will need to be used here to hold filtered search results
+   render() {
     return (
         <>
             <h2>Tool List</h2>
@@ -27,6 +49,7 @@ function ToolList(props) {
             </div>
         </>
     )
+   }
 }
 
 const mapStateToProps = state => {
@@ -39,5 +62,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { }
+    { addTool }
 )(ToolList)
