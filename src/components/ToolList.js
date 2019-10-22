@@ -53,7 +53,8 @@ class ToolList extends React.Component {
     return (
         <>
             <h2>Tool List</h2>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap' }}>
+            <FilterSearch tools={this.props.tools}/>
                 {/* Minimal search component replaces 'search' div */}
                 {/* <div className="search" style={{ height: '50vh', width: '80vw', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <form>
@@ -62,12 +63,12 @@ class ToolList extends React.Component {
                         <button type="submit">Search</button>
                     </form>
                 </div> */}
-                <FilterSearch tools={this.props.tools}/>
-                <button type="submit">Search</button>
+                {/* <FilterSearch tools={this.props.tools}/> */}
+                {/* <button type="submit">Search</button> */}
                 {/* Featured listings appear below. Search submissions will filter the featured listings */}
-                <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+                {/* <div className="featured-tools" style={{ width: '80vw', height: '100vh', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}> */}
                     {/* The four div elements below will be removed. This is just shows how 4 tool cards will be positioned. */}
-                    {this.props.tools.map(e =>
+                    {/* {this.props.tools.map(e =>
                         <Card style={{ width:"35%", height:"45%", margin:20 }}>
                             <CardActionArea>
                                 <img width="25%" src={e.img_url} />
@@ -81,8 +82,8 @@ class ToolList extends React.Component {
                                 <Button variant="contained" color="secondary">Rent</Button>
                             </CardActions>
                         </Card>
-                        )}
-                </div>
+                        )} */}
+                {/* </div> */}
             </div>
         </>
     )
