@@ -47,10 +47,10 @@ function Home(props) {
 
     return (
         <>
-            <h2>Home</h2>
-            <div className="hero-search" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue' }}>
+            <div className="hero-search" style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundImage: 'url(https://i.imgur.com/FcZNjJ7.png)' }}>
                 <form>
                     {/* handleChange and onSubmit will need to be added */}
+                    <h2>Need a tool? See what's available!</h2>
                     <input type="text"/>
                     <button type="submit">Search</button>
                 </form>
@@ -65,7 +65,7 @@ function Home(props) {
                 </div>
                 <div className="featured-products" style={{ height: '80vh', width: '80vw', alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                     {/* Replace divs below with card components getting props from state passed down */}
-                    {availableTools.map(e => 
+                    {availableTools.map(e =>
                         <Card className={classes.card}>
                             <CardActionArea>
                                 <img width="25%" src={e.listingImg} />

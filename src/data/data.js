@@ -82,7 +82,8 @@ export const availableTools = [
             lenderZip: "90210",
             lenderFeedback: [5,5,5,5,5,4,5,3,5,4,5,4,5,5]
         }
-    }
+    },
+    
 ]
 
 export const loggedUser = {

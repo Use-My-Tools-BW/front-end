@@ -6,7 +6,7 @@ function Account(props) {
     return(
         <>
             <h2>Account</h2>
-            <div className="account-section" style={{ height: '100vh', width: '100vw', backgroundColor: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+            <div className="account-section" style={{ height: '100vh', width: '100%', backgroundColor: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
                 <div className="icon-buttons" style={{ width: '25%', height: '80%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {/* Three div elements below show how icon buttons will be positioned */}
                     <div style={{ height: '30%', width: '80%', backgroundColor: 'green' }} />
