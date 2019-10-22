@@ -1,26 +1,89 @@
 import React from 'react';
 
+import Swiper from 'react-id-swiper';
+
+
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
 import { connect } from "react-redux";
 
+import { accountIcons, toolCategories, availableTools } from "../data/data"
+
+
+const params = {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    pagination: {
+        clickable: true,
+    },
+    scrollbar: {
+        el: '.swiper-scrollbar',
+        hide: false
+    },
+}
+
+const useStyles = makeStyles({
+    card: {
+    },
+  });
+
+
 function Account(props) {
+    const classes = useStyles();
+
     return(
         <>
-            <h2>Account</h2>
-            <div className="account-section" style={{ height: '100vh', width: '100vw', backgroundColor: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
-                <div className="icon-buttons" style={{ width: '25%', height: '80%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+            <div className="account-section" style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+                <div className="icon-buttons" style={{ width: '25%', height: '80%', backgroundColor: '#F5F7EA', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {/* Three div elements below show how icon buttons will be positioned */}
-                    <div style={{ height: '30%', width: '80%', backgroundColor: 'green' }} />
-                    <div style={{ height: '30%', width: '80%', backgroundColor: 'green' }} />
-                    <div style={{ height: '30%', width: '80%', backgroundColor: 'green' }} />
+                    {accountIcons.map(e =>
+                        <div style={{ width: '100%' }}><span class={e.class} data-icon={e.dataIcon} data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>{e.name}</p></div>
+                    )} 
                 </div>
                 <div className="currently-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
-                    <div className="currently-renting" style={{ width: '80%', height: '45%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
-                        {/* Three div elements below show how currently renting slider will be positioned */}
-                        <div style={{ height: '80%', width: '90%', backgroundColor: 'green' }} />
+                <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
+                    <div className="currently-renting" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
+                        <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
+                            {availableTools.map(e =>
+                                <Card className={classes.card}>
+                                <CardActionArea>
+                                        <img width="25%" src={e.listingImg} />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {e.listingtitle}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                </CardContent>
+                                </CardActionArea>
+                            </Card>
+                            )}  
+                        </Swiper>
                     </div>
-                    <div className="currently-lending" style={{ width: '80%', height: '45%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
-                        {/* Three div elements below show howw currently lending slider will be positioned */}
-                        <div style={{ height: '80%', width: '90%', backgroundColor: 'green' }} />
+                    <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Lending History</h3></div>
+                    <div className="currently-lending" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
+                        <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
+                            {availableTools.map(e =>
+                                <Card className={classes.card}>
+                                    <CardActionArea>
+                                            <img width="25%" src={e.listingImg} />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {e.listingtitle}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                    </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            )}  
+                        </Swiper>
                     </div>
                 </div>
             </div>
