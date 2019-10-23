@@ -27,7 +27,7 @@ const classes = useStyles();
            <Button  color="inherit">Legal Notices</Button>
            <Button  color="inherit">Terms of use</Button>
            <Button  color="inherit">Privacy Policy</Button>
-           <Typography variant="body2" align="center">
+            <Typography  align="center">
             {'Copyright © '}
             Use My Tools 2019
             </Typography>

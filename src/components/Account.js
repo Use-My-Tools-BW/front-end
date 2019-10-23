@@ -125,7 +125,7 @@ function Account(props) {
                             </div>
                         </Modal>
                         <div style={{ width: '100%' }}><span class="iconify" data-icon="fa-solid:shopping-basket" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Rent Tools</p></div>
-                        <div style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div>
+                        <Link to = "/Post/" style={{ textDecoration: 'none' }}><div style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div></Link>
                 </div>
                 <div className="currently-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
                 <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
