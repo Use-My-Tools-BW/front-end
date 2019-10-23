@@ -31,6 +31,9 @@ function App() {
       <Route path = "/ToolList/" component = {ToolList} />
 {/*   
       <Home />
+      <Login />
+      <RegisterForm />
+      <PostListingForm />
       <ToolList />
       <Account />
       <Confirmation />  */}

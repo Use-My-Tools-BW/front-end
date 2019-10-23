@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { Link, NavLink } from "react-router-dom";
+
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 import { connect } from "react-redux";
@@ -45,11 +47,10 @@ const [tool, setTool] = useState({
     make: "",
     model: "",
     img_url: "",
-    daily_cost: 0,
+    daily_cost: 5,
     available: true,
     condition: "",     
     category: ""
-
 });
 
 useEffect(() => {
@@ -75,11 +76,10 @@ const changeHandler = event => {
 }
 
 
-return ( 
 
+return ( 
     <div>  
         <button onClick={() => console.log(props)}>View Props</button>
-
         <h1>Post Your Tools!</h1>
         <form className ={classes.container} onSubmit ={submitHandler}>
             {/* <textField 
@@ -167,9 +167,7 @@ return (
                 required
                 />
             </label>
-
-
-            <Link to ="/ToolList/"><button type ="submit">Upload Your Item</button></Link>
+            <button type ="submit">Upload Your Item</button>
         </form>
     </div>
 )

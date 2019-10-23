@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 
 export default function EditAccountForm(props){
+    const [userInfo, setUserInfo] = useState({})
     const [userCredentials, setCredentails] = useState({
         first_name: "",
         last_name: "",
@@ -13,6 +14,7 @@ export default function EditAccountForm(props){
         state: "",
         zip: ""
     });
+    console.log(props)
     const submitHandler = event => {
         event.preventDefault();
         console.log(userCredentials);
@@ -26,6 +28,14 @@ export default function EditAccountForm(props){
     const changeHandler = event => {
         setCredentails({ ...userCredentials, [event.target.name]: event.target.value })
     }
+
+    useEffect(() => {
+        axios
+        .get(`https://usemytoolsbw.herokuapp.com/api/auth/user/${props.loggedUser}`)
+        .then(res => setCredentails(res.data) & console.log(res))
+    }, []);
+
+
     return (
         <div>
             <h1>Edit Your Account</h1>

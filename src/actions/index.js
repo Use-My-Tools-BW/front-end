@@ -1,4 +1,4 @@
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { axiosWithAuth } from "../components/utils/axiosWithAuth";
 import axios from "axios";
 
 export const START_FETCHING = "START_FETCHING";
@@ -8,6 +8,8 @@ export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
 export const FETCH_EDITUSER_SUCCESS = "FETCH_EDITUSER_SUCCESS";
 export const FETCH_ADDTOOL_SUCCESS = "FETCH_ADDTOOL_SUCCESS";
 export const FETCH_USERSTOOLS_SUCCESS = "FETCH_USERSTOOLS_SUCCESS";
+export const FETCH_DELETETOOL_SUCCESS = "FETCH_DELETETOOL_SUCCESS"
+export const FETCH_USERDETAILS_SUCCESS = "FETCH_USERDETAILS_SUCCESS"
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
 export const ADD_TOOL = "ADD_TOOL"
@@ -28,7 +30,6 @@ export const fetchLoginUser = (login) => dispatch => {
     .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res.data.userId }) & localStorage.setItem("token", res.data.token) & console.log(res.data.userId, "Data returned from fetchLoginSuccess action and set to state."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
-
 export const fetchEditUser = (obj) => dispatch => {
     // fetchEditUser is invokes with new user's object parameters
     dispatch({ type: START_FETCHING });
@@ -56,5 +57,21 @@ export const fetchUsersTools = (id) => dispatch => {
     axios
     .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${id}`)
     .then(res => dispatch({ type: FETCH_USERSTOOLS_SUCCESS, payload: res.data }) & console.log(res, "Data returned from fetchUsersTools action and set to state."))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }) & console.log(err))
+}
+
+export const fetchDeleteTools = (id) => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axiosWithAuth()
+    .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`)
+    .then(res => dispatch({ type: FETCH_DELETETOOL_SUCCESS }) & console.log(res))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err }))
+}
+
+export const fetchUserDetails = (id) => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axios
+    .get(`https://usemytoolsbw.herokuapp.com/api/auth/user/${id}`)
+    .then(res => dispatch({ type: FETCH_USERDETAILS_SUCCESS, payload: res.data })& console.log(res, "fetchUserDetails"))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }

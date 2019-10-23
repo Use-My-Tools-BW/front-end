@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { axiosWithAuth } from "../components/utils/axiosWithAuth"
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -32,6 +34,14 @@ export default function FilterSearch(props) {
         console.log(props)
     }
 
+    
+    const handleRentTool = (cost, toolId, renterId) => event => {
+        axiosWithAuth()
+            .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    }
+
      useEffect (() => {
         const data = props.tools
         const transform = data.filter(e => e.title.toLowerCase().includes(query))
@@ -39,7 +49,7 @@ export default function FilterSearch(props) {
         console.log(transform)
     },[query])
     
-
+        
    
         return (
             <div>
@@ -63,7 +73,7 @@ export default function FilterSearch(props) {
                             </CardActionArea>
                             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary">Rent</Button>
+                                <Button variant="contained" color="secondary" onClick={handleRentTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
                             </CardActions>
                         </Card>
             )}

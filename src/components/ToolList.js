@@ -2,6 +2,8 @@ import React from 'react';
 import { addTool } from '../actions';
 import { connect } from "react-redux";
 
+import { axiosWithAuth } from "../components/utils/axiosWithAuth"
+
 import { fetchToolListings } from "../actions";
 
 import FilterSearch from './FilterSearch';
@@ -46,6 +48,7 @@ class ToolList extends React.Component {
         })
     }
 
+
     // classes = useStyles();
 
     // A useState() hook will need to be used here to hold filtered search results
@@ -54,7 +57,7 @@ class ToolList extends React.Component {
         <>
             <h2>Tool List</h2>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap' }}>
-            <FilterSearch tools={this.props.tools}/>
+            <FilterSearch tools={this.props.tools} loggedUser={this.props.loggedUser}/>
                 {/* Minimal search component replaces 'search' div */}
                 {/* <div className="search" style={{ height: '50vh', width: '80vw', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <form>
@@ -94,7 +97,8 @@ const mapStateToProps = state => {
     return {
         tools: state.tools,
         isFetching: state.isFetching,
-        error: state.error
+        error: state.error,
+        loggedUser: state.loggedUser
     };
   };
 
