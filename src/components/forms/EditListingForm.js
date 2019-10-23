@@ -5,15 +5,15 @@ import axios from 'axios';
 export default function EditListingForm(props){
     const [tool, setTool] = useState({
         user_id: 0,
-        title: "",
-        description:"",
-        make: "",
-        model: "",
-        img_url: "",
-        daily_cost: 0,
-        available: true,
-        condition: "",     
-        category: ""
+        title: props.tool.title,
+        description:props.tool.description,
+        make: props.tool.make,
+        model: props.tool.model,
+        img_url: props.tool.img_url,
+        daily_cost: props.tool.daily_cost,
+        available: props.tool.available,
+        condition: props.tool.daily_cost,     
+        category: props.tool.category
     });
 
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import EditListingForm from "../components/forms/EditListingForm"
 
+import { axiosWithAuth } from "../utils/axiosWithAuth"
 import axios from "axios";
 
 import Swiper from 'react-id-swiper';
@@ -57,7 +58,8 @@ const params = {
     },
     paper: {
       position: 'absolute',
-      width: 400,
+      width: 600,
+      height: 250,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -74,6 +76,13 @@ function Account(props) {
 
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
+
+    const handleDeletePost = (id) => {
+        axiosWithAuth()
+            .delete(`https://usemytoolsbw.herokuapp.com/api/auth/user/${id}`)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    }
   
     const handleOpen = () => {
       setOpen(true);
@@ -123,7 +132,7 @@ function Account(props) {
                                         <EditListingForm tool={e}/>
                                     </div>
                                     </Modal>
-                                    <Button>Delete</Button>
+                                    <Button onClick={() => handleDeletePost(e.id)}>Delete</Button>
                                     </CardActionArea>
                                 </Card>
                             )}  
