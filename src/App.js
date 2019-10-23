@@ -23,21 +23,22 @@ function App() {
         {/* <Route exact path="/" component={Login}/>
         <Route exact path="/" component={RegisterForm}/>
       */}
-      {/* <Route exact path="/" component={Home}/>
+      <Route exact path="/" component={Home}/>
       <Route  path="/Login/" component={Login}/>
       <Route path="/Register/" component={RegisterForm}/>
-      <Route path ="/Post/" component ={PostListingForm} /> */}
-
-  
+      <Route path ="/Post/" component ={PostListingForm} />
+      <Route path ="/Account/" component ={Account} />
+      <Route path = "/ToolList/" component = {ToolList} />
+{/*   
       <Home />
       <Login />
       <RegisterForm />
       <PostListingForm />
       <ToolList />
       <Account />
-      <Confirmation /> 
-      
-       <Footer />
+      <Confirmation />  */}
+     
+     <Footer /> 
 
     </div>
   );

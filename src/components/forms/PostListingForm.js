@@ -1,9 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import { Link, NavLink } from "react-router-dom";
+
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 import { connect } from "react-redux";
 import { addTool, fetchUsersTools } from "../../actions/index"
+
+
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import { classes } from 'istanbul-lib-coverage';
+
+// MaterialUI
+
+const useStyles = makeStyles(theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
+    dense: {
+      marginTop: theme.spacing(2),
+    },
+    menu: {
+      width: 200,
+    },
+  }));
+
+// end of materialUI
+
+
+
 
 function PostListingForm(props){
 const [tool, setTool] = useState({
@@ -47,7 +81,16 @@ return (
     <div>  
         <button onClick={() => console.log(props)}>View Props</button>
         <h1>Post Your Tools!</h1>
-        <form onSubmit ={submitHandler}>
+        <form className ={classes.container} onSubmit ={submitHandler}>
+            {/* <textField 
+            label ="Item"
+            classNamme={classes.textField}
+            value ={tool.title}
+            onChange ={changeHandler}
+            margin = "normal"
+            variant ="outlined"
+            /> */}
+
             <label>
                 Title:
                 <input 

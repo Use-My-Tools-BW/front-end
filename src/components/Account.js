@@ -151,6 +151,7 @@ function Account(props) {
                                 <PostListingForm loggedUser={props.loggedUser} userInfo={props.userInfo} />
                             </div>
                         </Modal>
+
                 </div>
                 <div className="currently-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
                 <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
