@@ -3,28 +3,25 @@ import axios from 'axios';
 
 
 export default function EditListingForm(props){
-const [toolList, setToolList] = useState({
-
-    active: false || true ,
-    listingTitle: "",
-    model:"",
-    manufacturer: "",
-    category: "",
-    dateStart: "",
-    dateEnd: "",
-         
-    condition: "",
-    totalCost: 0,
-    listingImg: ""
-});
+    const [tool, setTool] = useState({
+        user_id: 0,
+        title: "",
+        description:"",
+        make: "",
+        model: "",
+        img_url: "",
+        daily_cost: 0,
+        available: true,
+        condition: "",     
+        category: ""
+    });
 
 
 
 const submitHandler = event => {
     event.preventDefault();
-    console.log(toolList); 
 
-    axios.put("https://reqres.in/api/users", toolList )  
+    axios.put("https://reqres.in/api/users" )  
         .then(res => {
             console.log(res);
             props.history.push("/");
@@ -37,7 +34,7 @@ const submitHandler = event => {
 
 
 const changeHandler = event => {
-    setToolList({ ...toolList, [event.target.name]: event.target.value })
+    setTool({ ...tool, [event.target.name]: event.target.value })
 }
 
 
@@ -48,18 +45,13 @@ return (
         <h1>Edit your tool</h1>
         <form onSubmit ={submitHandler}>
             <label>
-                Active?
-                <input
-                type = "checkbox" name = "active"  value ={toolList.active}
-                />
-            </label>
-            <label>
-                Item:
+                Title:
                 <input 
                 type = "text"
-                name="listingTitle"
-                value={toolList.listingTitle}
+                name="title"
+                value={tool.title}
                 onChange={changeHandler}
+                required
                 />
             </label>
             <label>
@@ -67,7 +59,7 @@ return (
                 <input 
                 type = "text"
                 name="model"
-                value={toolList.model}
+                value={tool.model}
                 onChange={changeHandler}
                 />
             </label>
@@ -75,8 +67,8 @@ return (
                 Manufacturer:
                 <input 
                 type = "text"
-                name="manufacturer"
-                value={toolList.manufacturer}
+                name="make"
+                value={tool.make}
                 onChange={changeHandler}
                 />
             </label>
@@ -85,25 +77,7 @@ return (
                 <input 
                 type = "text"
                 name="category"
-                value={toolList.category}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                Start Date:
-                <input 
-                type = "date"
-                name="dateStart"
-                value={toolList.dateStart}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                End Date:
-                <input 
-                type = "date"
-                name="dateEnd"
-                value={toolList.dateEnd}
+                value={tool.category}
                 onChange={changeHandler}
                 />
             </label>
@@ -112,7 +86,7 @@ return (
                 <input 
                 type = "text"
                 name="condition"
-                value={toolList.condition}
+                value={tool.condition}
                 onChange={changeHandler}
                 />
             </label>
@@ -120,24 +94,32 @@ return (
                 Total Cost:
                 <input 
                 type = "text"
-                name="totalCost"
-                value={toolList.totalCost}
+                name="daily_cost"
+                value={tool.daily_cost}
                 onChange={changeHandler}
+                required
                 />
             </label>
-
-         
-
-            <div className = "img-container">
-                <label>
-                    Upload Your Img:
-                <input className ="fileInput"
-                type ="file"
+            <label>
+                Image URL
+                <input 
+                type = "text"
+                name="img_url"
+                value={tool.img_url}
                 onChange={changeHandler}
-                value ={toolList.listingImg}
+                required
                 />
-                </label>
-            </div>
+            </label>
+            <label>
+                Description
+                <input 
+                type = "text"
+                name="description"
+                value={tool.description}
+                onChange={changeHandler}
+                required
+                />
+            </label>
             <button type ="submit">Upload Your Item</button>
         </form>
     </div>
