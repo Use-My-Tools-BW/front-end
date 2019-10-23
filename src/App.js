@@ -20,10 +20,10 @@ function App() {
         <Route exact path="/" component={RegisterForm}/>
         <PostListingForm />
         
-      <Home />
+      {/* <Home />
       <ToolList />
       <Account />
-      <Confirmation />
+      <Confirmation /> */}
 
     </div>
   );
