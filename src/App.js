@@ -10,6 +10,7 @@ import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
 import PostListingForm from './components/forms/PostListingForm';
+import EditListingForm from './components/forms/EditListingForm';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 
         <Route exact path="/" component={Login}/>
         <Route exact path="/" component={RegisterForm}/>
-        <PostListingForm />
+        <Route exact path="/" component={PostListingForm} />
         <Route exact path="/account" component={Account} />
       {/* <Home />
       <ToolList />

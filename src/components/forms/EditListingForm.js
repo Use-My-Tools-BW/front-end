@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 export default function EditListingForm(props){
 const [toolList, setToolList] = useState({
 
@@ -21,7 +22,7 @@ const [toolList, setToolList] = useState({
 
 const submitHandler = event => {
     event.preventDefault();
-    console.log(toolList);
+    console.log(toolList); 
 
     axios.put("https://reqres.in/api/users", toolList )  
         .then(res => {
@@ -43,6 +44,7 @@ const changeHandler = event => {
 
 return ( 
     <div>
+        <button onClick={() => console.log(props)}>check props</button>
         <h1>Edit your tool</h1>
         <form onSubmit ={submitHandler}>
             <label>

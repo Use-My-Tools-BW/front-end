@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from 'react';
 
+import EditListingForm from "../components/forms/EditListingForm"
+
 import axios from "axios";
 
 import Swiper from 'react-id-swiper';
+
+import { Route, Link } from "react-router-dom";
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +17,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
 
 
 import { connect } from "react-redux";
@@ -32,20 +37,52 @@ const params = {
         hide: false
     },
 }
+    function rand() {
+        return Math.round(Math.random() * 20) - 10;
+    }
 
-const useStyles = makeStyles({
+  function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+  
+  const useStyles = makeStyles(theme => ({
     card: {
     },
-  });
-
-
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
 
 
 function Account(props) {
     const [postedTools, setPostedTools] = useState([])
     const [rentedTools, setRentedTools] = useState([])
+    //Modal Start
     const classes = useStyles();
 
+    const [modalStyle] = React.useState(getModalStyle);
+    const [open, setOpen] = React.useState(false);
+  
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+    //Model End
     useEffect(() => {
         axios
             .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${props.loggedUser}`)
@@ -67,16 +104,28 @@ function Account(props) {
                         <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
                             {postedTools.map(e =>
                                 <Card className={classes.card}>
-                                <CardActionArea>
-                                        <img width="25%" src={e.img_url} />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {e.title}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
-                                </CardContent>
-                                </CardActionArea>
-                            </Card>
+                                    <CardActionArea>
+                                            <img width="25%" src={e.img_url} />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {e.title}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                    </CardContent>
+                                    <Button onClick={handleOpen}>Edit</Button>
+                                    <Modal
+                                        aria-labelledby="simple-modal-title"
+                                        aria-describedby="simple-modal-description"
+                                        open={open}
+                                        onClose={handleClose}
+                                    >
+                                    <div style={modalStyle} className={classes.paper}>
+                                        <EditListingForm tool={e}/>
+                                    </div>
+                                    </Modal>
+                                    <Button>Delete</Button>
+                                    </CardActionArea>
+                                </Card>
                             )}  
                         </Swiper>
                     </div>
@@ -100,6 +149,7 @@ function Account(props) {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }
