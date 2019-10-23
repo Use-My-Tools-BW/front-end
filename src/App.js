@@ -25,11 +25,11 @@ function App() {
       <Route path="/Register/" component={RegisterForm}/>
       <Route path ="/Post/" component ={PostListingForm} /> */}
 
- 
+  
       <Home />
       <ToolList />
       <Account />
-      <Confirmation />
+      <Confirmation /> 
       
        <Footer />
     </div>

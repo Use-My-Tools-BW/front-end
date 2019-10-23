@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+
 export default function PostListingForm(props){
+    
+
+
 const [toolList, setToolList] = useState({
 
     active: false || true ,
@@ -40,9 +45,8 @@ const changeHandler = event => {
 }
 
 
-
 return ( 
-    <div>
+    <div >
         <h1>Post Your Tools!</h1>
         <form onSubmit ={submitHandler}>
             <label>
@@ -127,9 +131,6 @@ return (
                 required
                 />
             </label>
-
-         
-
             <div className = "img-container">
                 <label>
                     Upload Your Img:
