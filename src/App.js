@@ -10,21 +10,31 @@ import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
 import PostListingForm from './components/forms/PostListingForm';
-import EditListingForm from './components/forms/EditListingForm';
+
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
 
 function App() {
   return (
     <div className="App">
 
-        <Route exact path="/" component={Login}/>
-        <Route path="/" component={RegisterForm}/>
-        <Route exact path="/" component={PostListingForm} />
-        <Route exact path="/account" component={Account} />
-      {/* <Home />
+     <NavBar />
+        {/* <Route exact path="/" component={Login}/>
+        <Route exact path="/" component={RegisterForm}/>
+      */}
+      {/* <Route exact path="/" component={Home}/>
+      <Route  path="/Login/" component={Login}/>
+      <Route path="/Register/" component={RegisterForm}/>
+      <Route path ="/Post/" component ={PostListingForm} /> */}
+
+  
+      <Home />
       <ToolList />
+      <Account />
+      <Confirmation /> 
       
-      <Confirmation /> */}
+       <Footer />
 
     </div>
   );

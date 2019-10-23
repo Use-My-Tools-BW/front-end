@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 import { connect } from "react-redux";
@@ -17,6 +18,7 @@ const [tool, setTool] = useState({
     available: true,
     condition: "",     
     category: ""
+
 });
 
 useEffect(() => {
@@ -42,10 +44,11 @@ const changeHandler = event => {
 }
 
 
-
 return ( 
+
     <div>  
         <button onClick={() => console.log(props)}>View Props</button>
+
         <h1>Post Your Tools!</h1>
         <form onSubmit ={submitHandler}>
             <label>
@@ -124,6 +127,8 @@ return (
                 required
                 />
             </label>
+
+
             <button type ="submit">Upload Your Item</button>
         </form>
     </div>
