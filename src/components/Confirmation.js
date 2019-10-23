@@ -9,6 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 
 function Confirmation(props) {
 
@@ -45,22 +47,37 @@ function Confirmation(props) {
 
     // delete functionality here?
 
+    const confirmationStyles = makeStyles({
+        bigAvatar: {
+            margin: 0,
+            width: 80,
+            height: 80,
+        },
+    });
+
+    
+    const classes = confirmationStyles();
+    
+
     return(
         <>
             <h2>Confirmation</h2>
             <div className="confirmation-screen" style={{ width: '100%', height: '100vh', backgroundColor: 'blue', display: 'flex', alignItems: 'center' }}>
                 <div className="left-column" style={{ height: '100vh', width: '50%', backgroundColor: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-around', flexDirection: 'column'  }}>
-                    <div className="product-image" style={{ width: '50%', height: '25%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+                    <div className="product-image" style={{ width: '50%', height: '25%', backgroundColor: 'none', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                         {/* below will be where the product image shows  */}
-                        <Card style={{ height: '80%', width: '80%', backgroundColor: 'green' }}>
+                        <Card style={{ height: '80%', width: '80%', backgroundColor: 'none' }}>
                             <CardContent>
                                 <h3>Tool Image</h3>
                             </CardContent>
+                            <Grid container justify="center" alignItems="center">
+                                <Avatar src="" className={classes.bigAvatar} />
+                            </Grid>
                         </Card>
                     </div>
-                    <div className="product-details" style={{ width: '50%', height: '30%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+                    <div className="product-details" style={{ width: '50%', height: '30%', backgroundColor: 'none', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                         {/* below will be where the product details(name, model, etc) will show*/}
-                        <Card Style={{ height: '80%', width: '80%', backgroundColor: 'green' }}>
+                        <Card style={{ height: '80%', width: '80%', backgroundColor: 'none' }}>
                             <CardContent>
                                 <h3>Product Details</h3>
                             </CardContent>
