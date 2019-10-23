@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import EditListingForm from "../components/forms/EditListingForm"
+import EditAccountForm from "../components/forms/EditAccountForm"
 
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import axios from "axios";
@@ -76,10 +77,15 @@ function Account(props) {
 
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
+    const [openAccount, setOpenAccount] = React.useState(false);
 
-    const handleDeletePost = (id) => {
+    const handleDeletePost = (event, id) => {
+        console.log(event, "event from handleDeletePost")
+        console.log(id, "id from handleDeletePost")
+        console.log(localStorage.getItem("token"))
+        event.preventDefault();
         axiosWithAuth()
-            .delete(`https://usemytoolsbw.herokuapp.com/api/auth/user/${id}`)
+            .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }
@@ -87,10 +93,15 @@ function Account(props) {
     const handleOpen = () => {
       setOpen(true);
     };
-  
     const handleClose = () => {
       setOpen(false);
     };
+    const handleOpenAccount = () => {
+        setOpenAccount(true);
+      };
+      const handleCloseAccount = () => {
+        setOpenAccount(false);
+      };
     //Model End
     useEffect(() => {
         axios
@@ -102,9 +113,17 @@ function Account(props) {
         <>
             <div className="account-section" style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
                 <div className="icon-buttons" style={{ width: '25%', height: '80%', backgroundColor: '#F5F7EA', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
-                    {/* Three div elements below show how icon buttons will be positioned */}
-
-                        <div style={{ width: '100%' }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div>
+                        <div onClick={handleOpenAccount} style={{ width: '100%' }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div>
+                        <Modal
+                            aria-labelledby="simple-modal-title"
+                            aria-describedby="simple-modal-description"
+                            open={openAccount}
+                            onClose={handleCloseAccount}
+                        >
+                            <div style={modalStyle} className={classes.paper}>
+                                <EditAccountForm loggedUser={props.loggedUser} setPostedTools={setPostedTools} postedTools={postedTools} />
+                            </div>
+                        </Modal>
                         <div style={{ width: '100%' }}><span class="iconify" data-icon="fa-solid:shopping-basket" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Rent Tools</p></div>
                         <div style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div>
                 </div>
@@ -133,7 +152,7 @@ function Account(props) {
                                         <EditListingForm tool={e} setPostedTools={setPostedTools} postedTools={postedTools}/>
                                     </div>
                                     </Modal>
-                                    <Button onClick={() => handleDeletePost(e.id)}>Delete</Button>
+                                    <Button onClick={(event) => handleDeletePost(event, e.id)}>Delete</Button>
                                     </CardActionArea>
                                 </Card>
                             )}  
