@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 
+import { connect } from "react-redux";
+import { fetchLoginUser } from "../actions/index"
+
 const Login = props => {
     const [login, setLogin] = useState({email: "", password: ""})
 
@@ -12,15 +15,9 @@ const Login = props => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(login)
-        axiosWithAuth()
-        .post("/api/auth/login", login)
-        .then(res => {
-            console.log(res)
-            localStorage.setItem("token", res.data.token)
-            //if, else to route proper login (props)
-        })
-        .catch(err => console.log(err))
-        setLogin({email: "", password: ""})
+        props.fetchLoginUser(login)
+        console.log(props, "props after handleSubmit")
+        props.history.push('/account')
     }
 
     return (
@@ -52,4 +49,15 @@ const Login = props => {
     )
 }
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+        loggedUser: state.loggedUser,
+        isFetching: state.isFetching,
+        error: state.error
+    };
+  };
+
+export default connect(
+    mapStateToProps,
+    { fetchLoginUser }
+)(Login)

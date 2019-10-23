@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { axiosWithAuth } from "../utils/axiosWithAuth"
+
 
 export default function EditListingForm(props){
-const [toolList, setToolList] = useState({
-
-    active: false || true ,
-    listingTitle: "",
-    model:"",
-    manufacturer: "",
-    category: "",
-    dateStart: "",
-    dateEnd: "",
-         
-    condition: "",
-    totalCost: 0,
-    listingImg: ""
-});
-
-
+    const [tool, setTool] = useState({
+        title: props.tool.title,
+        description:props.tool.description,
+        make: props.tool.make,
+        model: props.tool.model,
+        img_url: props.tool.img_url,
+        daily_cost: props.tool.daily_cost,
+        available: props.tool.available,
+        condition: props.tool.daily_cost,     
+        category: props.tool.category
+    });
+// Try doing a useEffect hook that has axios .get(api/tools/props.tool.id) and sets the results to state and uses that to populate input fields
+// First, get PUT requests to work
 
 const submitHandler = event => {
     event.preventDefault();
-    console.log(toolList);
-
-    axios.put("https://reqres.in/api/users", toolList )  
-        .then(res => {
-            console.log(res);
-            props.history.push("/");
-        })
+    axiosWithAuth()
+        .put(`https://usemytoolsbw.herokuapp.com/api/tools/${props.tool.id}`, tool)  
+        .then(res => console.log(res))
         .catch(err => console.log(err.response))
+    
+    console.log(tool, "Edit Form submit handler")
 }
 
 
@@ -36,28 +32,24 @@ const submitHandler = event => {
 
 
 const changeHandler = event => {
-    setToolList({ ...toolList, [event.target.name]: event.target.value })
+    setTool({ ...tool, [event.target.name]: event.target.value })
 }
 
 
 
 return ( 
     <div>
+        <button onClick={() => console.log(props)}>check props</button>
         <h1>Edit your tool</h1>
         <form onSubmit ={submitHandler}>
             <label>
-                Active?
-                <input
-                type = "checkbox" name = "active"  value ={toolList.active}
-                />
-            </label>
-            <label>
-                Item:
+                Title:
                 <input 
                 type = "text"
-                name="listingTitle"
-                value={toolList.listingTitle}
+                name="title"
+                value={tool.title}
                 onChange={changeHandler}
+                
                 />
             </label>
             <label>
@@ -65,7 +57,7 @@ return (
                 <input 
                 type = "text"
                 name="model"
-                value={toolList.model}
+                value={tool.model}
                 onChange={changeHandler}
                 />
             </label>
@@ -73,8 +65,8 @@ return (
                 Manufacturer:
                 <input 
                 type = "text"
-                name="manufacturer"
-                value={toolList.manufacturer}
+                name="make"
+                value={tool.make}
                 onChange={changeHandler}
                 />
             </label>
@@ -83,25 +75,7 @@ return (
                 <input 
                 type = "text"
                 name="category"
-                value={toolList.category}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                Start Date:
-                <input 
-                type = "date"
-                name="dateStart"
-                value={toolList.dateStart}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                End Date:
-                <input 
-                type = "date"
-                name="dateEnd"
-                value={toolList.dateEnd}
+                value={tool.category}
                 onChange={changeHandler}
                 />
             </label>
@@ -110,7 +84,7 @@ return (
                 <input 
                 type = "text"
                 name="condition"
-                value={toolList.condition}
+                value={tool.condition}
                 onChange={changeHandler}
                 />
             </label>
@@ -118,24 +92,32 @@ return (
                 Total Cost:
                 <input 
                 type = "text"
-                name="totalCost"
-                value={toolList.totalCost}
+                name="daily_cost"
+                value={tool.daily_cost}
                 onChange={changeHandler}
+                
                 />
             </label>
-
-         
-
-            <div className = "img-container">
-                <label>
-                    Upload Your Img:
-                <input className ="fileInput"
-                type ="file"
+            <label>
+                Image URL
+                <input 
+                type = "text"
+                name="img_url"
+                value={tool.img_url}
                 onChange={changeHandler}
-                value ={toolList.listingImg}
+                
                 />
-                </label>
-            </div>
+            </label>
+            <label>
+                Description
+                <input 
+                type = "text"
+                name="description"
+                value={tool.description}
+                onChange={changeHandler}
+                
+                />
+            </label>
             <button type ="submit">Upload Your Item</button>
         </form>
     </div>

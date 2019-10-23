@@ -10,12 +10,15 @@ import ToolList from "./components/ToolList";
 import Account from "./components/Account";
 import Confirmation from "./components/Confirmation";
 import PostListingForm from './components/forms/PostListingForm';
+
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+
 
 function App() {
   return (
     <div className="App">
+
      <NavBar />
         {/* <Route exact path="/" component={Login}/>
         <Route exact path="/" component={RegisterForm}/>
@@ -32,6 +35,7 @@ function App() {
       <Confirmation /> 
       
        <Footer />
+
     </div>
   );
 }

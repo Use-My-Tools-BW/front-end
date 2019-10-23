@@ -16,7 +16,8 @@ export default function RegisterForm(props) {
         event.preventDefault();
         console.log(userCredentials);
 
-        axios.post("https://usemytoolsbw.herokuapp.com/api/auth/register", userCredentials, {headers: {"Content-Type": "application/json"}})  //Ready for backend
+        axios
+        .post("https://usemytoolsbw.herokuapp.com/api/auth/register", userCredentials)  //Ready for backend
             .then(res => {
                 console.log(res);
                 // props.history.push("/");
@@ -69,7 +70,7 @@ export default function RegisterForm(props) {
                 name="state"
                 value={userCredentials.state}
                 onChange={changeHandler}
-                placeholder="City"
+                placeholder="State"
                 required
                 />
                 <input
