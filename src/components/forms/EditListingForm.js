@@ -49,7 +49,7 @@ return (
                 name="title"
                 value={tool.title}
                 onChange={changeHandler}
-                required
+                
                 />
             </label>
             <label>
@@ -95,7 +95,7 @@ return (
                 name="daily_cost"
                 value={tool.daily_cost}
                 onChange={changeHandler}
-                required
+                
                 />
             </label>
             <label>
@@ -105,7 +105,7 @@ return (
                 name="img_url"
                 value={tool.img_url}
                 onChange={changeHandler}
-                required
+                
                 />
             </label>
             <label>
@@ -115,7 +115,7 @@ return (
                 name="description"
                 value={tool.description}
                 onChange={changeHandler}
-                required
+                
                 />
             </label>
             <button type ="submit">Upload Your Item</button>

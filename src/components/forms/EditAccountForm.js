@@ -4,11 +4,13 @@ import axios from 'axios';
 
 export default function EditAccountForm(props){
     const [userCredentials, setCredentails] = useState({
-
-        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
         password: "",
-        email:""
-
+        city: "",
+        state: "",
+        zip: ""
     });
     const submitHandler = event => {
         event.preventDefault();
