@@ -9,6 +9,7 @@ export const FETCH_EDITUSER_SUCCESS = "FETCH_EDITUSER_SUCCESS";
 export const FETCH_ADDTOOL_SUCCESS = "FETCH_ADDTOOL_SUCCESS";
 export const FETCH_USERSTOOLS_SUCCESS = "FETCH_USERSTOOLS_SUCCESS";
 export const FETCH_DELETETOOL_SUCCESS = "FETCH_DELETETOOL_SUCCESS"
+export const FETCH_USERDETAILS_SUCCESS = "FETCH_USERDETAILS_SUCCESS"
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
 export const ADD_TOOL = "ADD_TOOL"
@@ -66,4 +67,12 @@ export const fetchDeleteTools = (id) => dispatch => {
     .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`)
     .then(res => dispatch({ type: FETCH_DELETETOOL_SUCCESS }) & console.log(res))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err }))
+}
+
+export const fetchUserDetails = (id) => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axios
+    .get(`https://usemytoolsbw.herokuapp.com/api/auth/user/${id}`)
+    .then(res => dispatch({ type: FETCH_USERDETAILS_SUCCESS, payload: res.data })& console.log(res, "fetchUserDetails"))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }

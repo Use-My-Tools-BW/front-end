@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
+import { axiosWithAuth } from "./utils/axiosWithAuth"
+
 import Swiper from 'react-id-swiper';
 
 /////////////////////////// Material-UI Start
@@ -48,6 +50,14 @@ function Home(props) {
         props.fetchToolListings();
       }, []);
 
+
+      const handleRentTool = (cost, toolId, renterId) => event => {
+        axiosWithAuth()
+            .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    }
+
     const classes = useStyles();
 
     return (
@@ -80,7 +90,7 @@ function Home(props) {
                             </CardActionArea>
                             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary">Rent</Button>
+                                <Button variant="contained" color="secondary" onClick={handleRentTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
                             </CardActions>
                         </Card>
                         )}
@@ -99,6 +109,7 @@ function Home(props) {
 
 const mapStateToProps = state => {
     return {
+        loggedUser: state.loggedUser,
         tools: state.tools,
         isFetching: state.isFetching,
         error: state.error

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import EditListingForm from "../components/forms/EditListingForm"
 import EditAccountForm from "../components/forms/EditAccountForm"
+import PostListingForm from "../components/forms/PostListingForm"
 
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import axios from "axios";
@@ -23,7 +24,7 @@ import Modal from '@material-ui/core/Modal';
 
 
 import { connect } from "react-redux";
-import { fetchDeleteTools } from "../actions/index"
+import { fetchDeleteTools, fetchUserDetails } from "../actions/index"
 
 import { accountIcons, toolCategories, availableTools } from "../data/data"
 
@@ -72,24 +73,22 @@ const params = {
 function Account(props) {
     const [postedTools, setPostedTools] = useState([])
     const [rentedTools, setRentedTools] = useState([])
+    const [userInfo, setUserInfo] = useState({})
     //Modal Start
     const classes = useStyles();
 
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
     const [openAccount, setOpenAccount] = React.useState(false);
-
-    const handleDeletePost = (id) => event => {
-        // props.fetchDeleteTools(id)
-        console.log(event, "event from handleDeletePost")
-        console.log(id, "id from handleDeletePost")
-        console.log(localStorage.getItem("token"))
-        const token = localStorage.getItem("token")
-        const header = {
-            headers: {
-                token: token
-            }
+    const [postTool, setPostTool] = React.useState(false);
+    const token = localStorage.getItem("token")
+    const header = {
+        headers: {
+            token: token
         }
+    }
+    const handleDeletePost = (id) => event => {
+
         axios
             .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`, header)
             .then(res => console.log(res))
@@ -104,16 +103,26 @@ function Account(props) {
     };
     const handleOpenAccount = () => {
         setOpenAccount(true);
-      };
-      const handleCloseAccount = () => {
-        setOpenAccount(false);
-      };
-    //Model End
+    };
+    const handleCloseAccount = () => {
+    setOpenAccount(false);
+    };
+    const handleOpenPostTool = () => {
+    setPostTool(true);
+    };
+    const handleClosePostTool = () => {
+    setPostTool(false);
+    };
+//Model End
     useEffect(() => {
         axios
             .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${props.loggedUser}`)
-            .then(res => setPostedTools(res.data) & setRentedTools(props.loggedRentedTools))
+            .then(res => setPostedTools(res.data) & console.log(res, "HERERERERE"))
+        axios
+            .get(`https://usemytoolsbw.herokuapp.com/api/rentals/renter/${props.loggedUser}`, header)
+            .then(res => setRentedTools(res.data) & console.log(res, "HERERERERE"))
     }, [props]);
+
 
     return(
         <>
@@ -127,17 +136,27 @@ function Account(props) {
                             onClose={handleCloseAccount}
                         >
                             <div style={modalStyle} className={classes.paper}>
-                                <EditAccountForm loggedUser={props.loggedUser} setPostedTools={setPostedTools} postedTools={postedTools} />
+                                <EditAccountForm loggedUser={props.loggedUser} userInfo={props.userInfo} />
                             </div>
                         </Modal>
                         <div style={{ width: '100%' }}><span class="iconify" data-icon="fa-solid:shopping-basket" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Rent Tools</p></div>
-                        <div style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div>
+                        <div onClick={handleOpenPostTool} style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div>
+                        <Modal
+                            aria-labelledby="simple-modal-title"
+                            aria-describedby="simple-modal-description"
+                            open={postTool}
+                            onClose={handleClosePostTool}
+                        >
+                            <div style={modalStyle} className={classes.paper}>
+                                <PostListingForm loggedUser={props.loggedUser} userInfo={props.userInfo} />
+                            </div>
+                        </Modal>
                 </div>
                 <div className="currently-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
                 <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
                     <div className="currently-renting" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                         <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
-                            {postedTools.map(e =>
+                            {rentedTools.map(e =>
                                 <Card className={classes.card}>
                                     <CardActionArea>
                                             <img width="25%" src={e.img_url} />
@@ -167,7 +186,7 @@ function Account(props) {
                     <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Lending History</h3></div>
                     <div className="currently-lending" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                     <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
-                            {rentedTools.map(e =>
+                            {postedTools.map(e =>
                                 <Card className={classes.card}>
                                 <CardActionArea>
                                         <img width="25%" src={e.img_url} />
@@ -177,6 +196,18 @@ function Account(props) {
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
                                 </CardContent>
+                                <Button onClick={handleOpen}>Edit</Button>
+                                <Modal
+                                    aria-labelledby="simple-modal-title"
+                                    aria-describedby="simple-modal-description"
+                                    open={open}
+                                    onClose={handleClose}
+                                >
+                                <div style={modalStyle} className={classes.paper}>
+                                    <EditListingForm tool={e} setPostedTools={setPostedTools} postedTools={postedTools}/>
+                                </div>
+                                </Modal>
+                                <Button onClick={handleDeletePost(e.id)}>Delete</Button>
                                 </CardActionArea>
                             </Card>
                             )}  
@@ -195,11 +226,12 @@ const mapStateToProps = state => {
         isFetching: state.isFetching,
         error: state.error,
         loggedPostedTools: state.loggedPostedTools,
-        loggedRentedTools: state.loggedRentedTools
+        loggedRentedTools: state.loggedRentedTools,
+        loggedUserInfo: state.loggedUserInfo
     };
   };
 
 export default connect(
     mapStateToProps,
-    { fetchDeleteTools }
+    { fetchDeleteTools, fetchUserDetails }
 )(Account)
