@@ -20,6 +20,8 @@ const Login = props => {
         props.history.push('/account')
     }
 
+    
+
     return (
         <div>
             <h1>Use My Tools</h1>
@@ -38,11 +40,11 @@ const Login = props => {
                 onChange={handleChange}
                 placeholder="Password"
                 />
-           <Link to ='/account' ><button type="submit">Log In</button></Link>
+           <Link to ='/account/' ><button type="submit">Log In</button></Link>
             </form>
             <div>
                 <p>
-                    Don't have an account?  <Link to='/register'>Register Now</Link>
+                    Don't have an account?  <Link to='/register/'>Register Now</Link>
                 </p>
             </div>
         </div>

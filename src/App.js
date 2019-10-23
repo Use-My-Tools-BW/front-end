@@ -27,7 +27,8 @@ function App() {
       <Route  path="/Login/" component={Login}/>
       <Route path="/Register/" component={RegisterForm}/>
       <Route path ="/Post/" component ={PostListingForm} />
-      <Route path ="/Account" component ={Account} />
+      <Route path ="/Account/" component ={Account} />
+      <Route path = "/ToolList/" component = {ToolList} />
 {/*   
       <Home />
       <ToolList />
