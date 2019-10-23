@@ -69,7 +69,7 @@ export default function RegisterForm(props) {
                 name="state"
                 value={userCredentials.state}
                 onChange={changeHandler}
-                placeholder="City"
+                placeholder="State"
                 required
                 />
                 <input
