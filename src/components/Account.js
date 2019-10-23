@@ -4,7 +4,7 @@ import EditListingForm from "../components/forms/EditListingForm"
 import EditAccountForm from "../components/forms/EditAccountForm"
 import PostListingForm from "../components/forms/PostListingForm"
 
-import { axiosWithAuth } from "../utils/axiosWithAuth"
+import { axiosWithAuth } from "../components/utils/axiosWithAuth"
 import axios from "axios";
 
 import Swiper from 'react-id-swiper';

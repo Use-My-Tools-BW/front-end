@@ -1,4 +1,4 @@
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { axiosWithAuth } from "../components/utils/axiosWithAuth";
 import axios from "axios";
 
 export const START_FETCHING = "START_FETCHING";
@@ -30,7 +30,6 @@ export const fetchLoginUser = (login) => dispatch => {
     .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res.data.userId }) & localStorage.setItem("token", res.data.token) & console.log(res.data.userId, "Data returned from fetchLoginSuccess action and set to state."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
-
 export const fetchEditUser = (obj) => dispatch => {
     // fetchEditUser is invokes with new user's object parameters
     dispatch({ type: START_FETCHING });

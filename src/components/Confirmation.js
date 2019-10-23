@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { axiosWithAuth } from "../components/utils/axiosWithAuth";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
