@@ -19,10 +19,10 @@ function App() {
         <Route exact path="/" component={Login}/>
         <Route exact path="/" component={RegisterForm}/>
         <PostListingForm />
-        
+        <Route exact path="/account" component={Account} />
       {/* <Home />
       <ToolList />
-      <Account />
+      
       <Confirmation /> */}
 
     </div>

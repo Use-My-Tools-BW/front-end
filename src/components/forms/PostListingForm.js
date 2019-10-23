@@ -3,7 +3,7 @@ import axios from 'axios';
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 import { connect } from "react-redux";
-import { addTool } from "../../actions/index"
+import { addTool, fetchUsersTools } from "../../actions/index"
 
 function PostListingForm(props){
 const [tool, setTool] = useState({
@@ -44,7 +44,8 @@ const changeHandler = event => {
 
 
 return ( 
-    <div>
+    <div>  
+        <button onClick={() => console.log(props)}>View Props</button>
         <h1>Post Your Tools!</h1>
         <form onSubmit ={submitHandler}>
             <label>
@@ -114,11 +115,11 @@ return (
                 />
             </label>
             <label>
-                User ID
+                Description
                 <input 
                 type = "text"
-                name="user_id"
-                value={tool.user_id}
+                name="description"
+                value={tool.description}
                 onChange={changeHandler}
                 required
                 />
@@ -133,11 +134,12 @@ const mapStateToProps = state => {
     return {
         isFetching: state.isFetching,
         error: state.error,
-        loggedUser: state.loggedUser
+        loggedUser: state.loggedUser,
+        loggedPostedTools: state.loggedPostedTools
     };
   };
 
 export default connect(
     mapStateToProps,
-    { addTool }
+    { addTool, fetchUsersTools }
 )(PostListingForm)

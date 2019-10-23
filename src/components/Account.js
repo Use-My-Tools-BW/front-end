@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+
+import axios from "axios";
 
 import Swiper from 'react-id-swiper';
 
@@ -14,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 import { connect } from "react-redux";
+import { fetchUsersTools } from "../actions/index"
 
 import { accountIcons, toolCategories, availableTools } from "../data/data"
 
@@ -36,8 +39,18 @@ const useStyles = makeStyles({
   });
 
 
+
+
 function Account(props) {
+    const [postedTools, setPostedTools] = useState([])
+    const [rentedTools, setRentedTools] = useState([])
     const classes = useStyles();
+
+    useEffect(() => {
+        axios
+            .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${props.loggedUser}`)
+            .then(res => setPostedTools(res.data) & setRentedTools(props.loggedRentedTools))
+    }, [props.loggedUser]);
 
     return(
         <>
@@ -52,15 +65,15 @@ function Account(props) {
                 <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
                     <div className="currently-renting" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                         <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
-                            {availableTools.map(e =>
+                            {postedTools.map(e =>
                                 <Card className={classes.card}>
                                 <CardActionArea>
-                                        <img width="25%" src={e.listingImg} />
+                                        <img width="25%" src={e.img_url} />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        {e.listingtitle}
+                                        {e.title}
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
                                 </CardContent>
                                 </CardActionArea>
                             </Card>
@@ -69,19 +82,19 @@ function Account(props) {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Lending History</h3></div>
                     <div className="currently-lending" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
-                        <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
-                            {availableTools.map(e =>
+                    <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
+                            {rentedTools.map(e =>
                                 <Card className={classes.card}>
-                                    <CardActionArea>
-                                            <img width="25%" src={e.listingImg} />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {e.listingtitle}
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">{[ `${e.lendSpan.dateStart} to ${e.lendSpan.dateEnd}`, <p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.totalCost}</p>].map(data => <p>{data}</p>)}</Typography>
-                                    </CardContent>
-                                    </CardActionArea>
-                                </Card>
+                                <CardActionArea>
+                                        <img width="25%" src={e.img_url} />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {e.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                </CardContent>
+                                </CardActionArea>
+                            </Card>
                             )}  
                         </Swiper>
                     </div>
@@ -95,11 +108,13 @@ const mapStateToProps = state => {
     return {
         loggedUser: state.loggedUser,
         isFetching: state.isFetching,
-        error: state.error
+        error: state.error,
+        loggedPostedTools: state.loggedPostedTools,
+        loggedRentedTools: state.loggedRentedTools
     };
   };
 
 export default connect(
     mapStateToProps,
-    { }
+    { fetchUsersTools }
 )(Account)

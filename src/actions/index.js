@@ -7,7 +7,7 @@ export const FETCH_TOOLLIST_SUCCESS = "FETCH_TOOLLIST_SUCCESS";
 export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
 export const FETCH_EDITUSER_SUCCESS = "FETCH_EDITUSER_SUCCESS";
 export const FETCH_ADDTOOL_SUCCESS = "FETCH_ADDTOOL_SUCCESS";
-
+export const FETCH_USERSTOOLS_SUCCESS = "FETCH_USERSTOOLS_SUCCESS";
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
 export const ADD_TOOL = "ADD_TOOL"
@@ -49,4 +49,12 @@ export const addTool = (tool) => dispatch => {
     .post(`https://usemytoolsbw.herokuapp.com/api/tools`, tool)
     .then(res => dispatch({ type: FETCH_ADDTOOL_SUCCESS, payload: res.data }) & console.log(res, "Data returned from fetchAddTool action and set to state. No data in response required. You should change loggedUser in redux store to reflect the object sent."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }) & console.log(tool))
+}
+
+export const fetchUsersTools = (id) => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axios
+    .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${id}`)
+    .then(res => dispatch({ type: FETCH_USERSTOOLS_SUCCESS, payload: res.data }) & console.log(res, "Data returned from fetchUsersTools action and set to state."))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
