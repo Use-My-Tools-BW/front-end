@@ -96,7 +96,7 @@ function Account(props) {
         axios
             .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${props.loggedUser}`)
             .then(res => setPostedTools(res.data) & setRentedTools(props.loggedRentedTools))
-    }, [props.loggedUser]);
+    }, [props]);
 
     return(
         <>
@@ -129,7 +129,7 @@ function Account(props) {
                                         onClose={handleClose}
                                     >
                                     <div style={modalStyle} className={classes.paper}>
-                                        <EditListingForm tool={e}/>
+                                        <EditListingForm tool={e} setPostedTools={setPostedTools} postedTools={postedTools}/>
                                     </div>
                                     </Modal>
                                     <Button onClick={() => handleDeletePost(e.id)}>Delete</Button>

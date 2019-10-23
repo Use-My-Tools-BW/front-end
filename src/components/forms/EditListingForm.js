@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { axioswithAuth, axiosWithAuth } from "../utils/axiosWithAuth"
 
 
 export default function EditListingForm(props){
     const [tool, setTool] = useState({
-        user_id: 0,
         title: props.tool.title,
         description:props.tool.description,
         make: props.tool.make,
@@ -15,18 +14,17 @@ export default function EditListingForm(props){
         condition: props.tool.daily_cost,     
         category: props.tool.category
     });
-
-
+// Try doing a useEffect hook that has axios .get(api/tools/props.tool.id) and sets the results to state and uses that to populate input fields
+// First, get PUT requests to work
 
 const submitHandler = event => {
     event.preventDefault();
-
-    axios.put("https://reqres.in/api/users" )  
-        .then(res => {
-            console.log(res);
-            props.history.push("/");
-        })
+    axiosWithAuth()
+        .put(`https://usemytoolsbw.herokuapp.com/api/tools/${props.tool.id}`, tool)  
+        .then(res => console.log(res))
         .catch(err => console.log(err.response))
+    
+    console.log(tool, "Edit Form submit handler")
 }
 
 
