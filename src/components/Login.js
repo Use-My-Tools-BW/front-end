@@ -17,7 +17,7 @@ const Login = props => {
         console.log(login)
         props.fetchLoginUser(login)
         console.log(props, "props after handleSubmit")
-        props.history.push('/account')
+        // props.history.push('/account')
     }
 
     return (

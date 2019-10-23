@@ -23,7 +23,7 @@ import Modal from '@material-ui/core/Modal';
 
 
 import { connect } from "react-redux";
-import { fetchUsersTools } from "../actions/index"
+import { fetchDeleteTools } from "../actions/index"
 
 import { accountIcons, toolCategories, availableTools } from "../data/data"
 
@@ -79,13 +79,19 @@ function Account(props) {
     const [open, setOpen] = React.useState(false);
     const [openAccount, setOpenAccount] = React.useState(false);
 
-    const handleDeletePost = (event, id) => {
+    const handleDeletePost = (id) => event => {
+        // props.fetchDeleteTools(id)
         console.log(event, "event from handleDeletePost")
         console.log(id, "id from handleDeletePost")
         console.log(localStorage.getItem("token"))
-        event.preventDefault();
-        axiosWithAuth()
-            .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`)
+        const token = localStorage.getItem("token")
+        const header = {
+            headers: {
+                token: token
+            }
+        }
+        axios
+            .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`, header)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }
@@ -152,7 +158,7 @@ function Account(props) {
                                         <EditListingForm tool={e} setPostedTools={setPostedTools} postedTools={postedTools}/>
                                     </div>
                                     </Modal>
-                                    <Button onClick={(event) => handleDeletePost(event, e.id)}>Delete</Button>
+                                    <Button onClick={handleDeletePost(e.id)}>Delete</Button>
                                     </CardActionArea>
                                 </Card>
                             )}  
@@ -195,5 +201,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchUsersTools }
+    { fetchDeleteTools }
 )(Account)

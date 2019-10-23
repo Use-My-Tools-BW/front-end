@@ -30,6 +30,9 @@ function App() {
 
   
       <Home />
+      <Login />
+      <RegisterForm />
+      <PostListingForm />
       <ToolList />
       <Account />
       <Confirmation /> 
