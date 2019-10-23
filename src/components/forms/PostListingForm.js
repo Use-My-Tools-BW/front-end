@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Link, NavLink } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 import { connect } from "react-redux";
@@ -100,7 +100,7 @@ return (
             <label>
                 Total Cost:
                 <input 
-                type = "text"
+                type = "number"
                 name="daily_cost"
                 value={tool.daily_cost}
                 onChange={changeHandler}
@@ -129,7 +129,7 @@ return (
             </label>
 
 
-            <button type ="submit">Upload Your Item</button>
+            <Link to ="/account"><button type ="submit">Upload Your Item</button></Link>
         </form>
     </div>
 )

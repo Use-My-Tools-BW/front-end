@@ -38,7 +38,7 @@ const Login = props => {
                 onChange={handleChange}
                 placeholder="Password"
                 />
-                <button type="submit">Log In</button>
+           <Link to ='/account' ><button type="submit">Log In</button></Link>
             </form>
             <div>
                 <p>
