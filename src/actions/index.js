@@ -69,7 +69,7 @@ export const fetchEditUserInformation = (id, newInfo) => dispatch => {
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
 // Used at Account
-export const fetchCreateLendPost = (newPost) => dispatch => {
+export const fetchCreateLendPost = (newPost) => dispatch => { 
     axiosWithAuth()
     .post("https://usemytoolsbw.herokuapp.com/api/tools", newPost)
     .then(res => dispatch({ type: FETCH_CREATELENDPOST_SUCCESS, payload: newPost }) & console.log(res.data, "fetchCreateLendPost"))
