@@ -22,11 +22,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
+import { fetchLendPosts, fetchRentedTools, fetchUserInformation, fetchEditUserInformation, fetchToolListings, fetchDeleteLendPost } from "../actions/index"
 
 import { connect } from "react-redux";
-import { fetchDeleteTools, fetchUserDetails } from "../actions/index"
 
-import { accountIcons, toolCategories, availableTools } from "../data/data"
 
 
 const params = {
@@ -57,6 +56,7 @@ const params = {
   
   const useStyles = makeStyles(theme => ({
     card: {
+        width: "35%"
     },
     paper: {
       position: 'absolute',
@@ -73,7 +73,6 @@ const params = {
 function Account(props) {
     const [postedTools, setPostedTools] = useState([])
     const [rentedTools, setRentedTools] = useState([])
-    const [userInfo, setUserInfo] = useState({})
     //Modal Start
     const classes = useStyles();
 
@@ -81,19 +80,6 @@ function Account(props) {
     const [open, setOpen] = React.useState(false);
     const [openAccount, setOpenAccount] = React.useState(false);
     const [postTool, setPostTool] = React.useState(false);
-    const token = localStorage.getItem("token")
-    const header = {
-        headers: {
-            token: token
-        }
-    }
-    const handleDeletePost = (id) => event => {
-
-        axios
-            .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`, header)
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }
   
     const handleOpen = () => {
       setOpen(true);
@@ -115,13 +101,15 @@ function Account(props) {
     };
 //Model End
     useEffect(() => {
-        axios
-            .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${props.loggedUser}`)
-            .then(res => setPostedTools(res.data) & console.log(res, "HERERERERE"))
-        axios
-            .get(`https://usemytoolsbw.herokuapp.com/api/rentals/renter/${props.loggedUser}`, header)
-            .then(res => setRentedTools(res.data) & console.log(res, "HERERERERE"))
-    }, [props]);
+        if(props.loggedUser > 0){
+        props.fetchLendPosts(props.loggedUser)
+        props.fetchRentedTools(props.loggedUser)
+        props.fetchUserInformation(props.loggedUser)
+        props.fetchToolListings()
+        } else{
+            props.history.push('/Login')
+        }
+    }, [props.loggedUser]);
 
 
     return(
@@ -136,7 +124,7 @@ function Account(props) {
                             onClose={handleCloseAccount}
                         >
                             <div style={modalStyle} className={classes.paper}>
-                                <EditAccountForm loggedUser={props.loggedUser} userInfo={props.userInfo} />
+                                <EditAccountForm loggedUser={props.loggedUser} loggedUserInfo={props.loggedUserInfo} fetchEditUserInformation={props.fetchEditUserInformation}/>
                             </div>
                         </Modal>
                         <div style={{ width: '100%' }}><span class="iconify" data-icon="fa-solid:shopping-basket" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Rent Tools</p></div>
@@ -157,7 +145,7 @@ function Account(props) {
                 <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
                     <div className="currently-renting" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                         <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
-                            {rentedTools.map(e =>
+                            {props.loggedRentedTools.map(e =>
                                 <Card className={classes.card}>
                                     <CardActionArea>
                                             <img width="25%" src={e.img_url} />
@@ -167,7 +155,6 @@ function Account(props) {
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
                                     </CardContent>
-                                    <Button onClick={handleOpen}>Edit</Button>
                                     <Modal
                                         aria-labelledby="simple-modal-title"
                                         aria-describedby="simple-modal-description"
@@ -175,10 +162,9 @@ function Account(props) {
                                         onClose={handleClose}
                                     >
                                     <div style={modalStyle} className={classes.paper}>
-                                        <EditListingForm tool={e} setPostedTools={setPostedTools} postedTools={postedTools}/>
+                                        <EditListingForm tool={e} />
                                     </div>
                                     </Modal>
-                                    <Button onClick={handleDeletePost(e.id)}>Delete</Button>
                                     </CardActionArea>
                                 </Card>
                             )}  
@@ -187,7 +173,7 @@ function Account(props) {
                     <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Lending History</h3></div>
                     <div className="currently-lending" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                     <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
-                            {postedTools.map(e =>
+                            {props.loggedPostedTools.map(e =>
                                 <Card className={classes.card}>
                                 <CardActionArea>
                                         <img width="25%" src={e.img_url} />
@@ -204,11 +190,11 @@ function Account(props) {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                <div style={modalStyle} className={classes.paper}>
-                                    <EditListingForm tool={e} setPostedTools={setPostedTools} postedTools={postedTools}/>
+                                <div style={modalStyle} className={classes.paper} >
+                                    <EditListingForm tool={e}/>
                                 </div>
                                 </Modal>
-                                <Button onClick={handleDeletePost(e.id)}>Delete</Button>
+                                <Button onClick={() => props.fetchDeleteLendPost(e.id)}>Delete</Button>
                                 </CardActionArea>
                             </Card>
                             )}  
@@ -223,6 +209,7 @@ function Account(props) {
 
 const mapStateToProps = state => {
     return {
+        tools: state.tools,
         loggedUser: state.loggedUser,
         isFetching: state.isFetching,
         error: state.error,
@@ -234,5 +221,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchDeleteTools, fetchUserDetails }
+    { fetchLendPosts, fetchRentedTools, fetchUserInformation, fetchEditUserInformation, fetchToolListings, fetchDeleteLendPost }
 )(Account)

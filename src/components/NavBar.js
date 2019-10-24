@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+
+import { connect } from "react-redux";
+
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -27,10 +30,17 @@ NavButton: {
 })
 
 
-
-
-export default function NavBar(){
+function NavBar(props){
     const classes = useStyles();
+    const [loginCheck, setLoginCheck] = useState("")
+
+    useEffect(() => {
+      if(props.loggedUser > 0){
+        setLoginCheck("Account")
+      } else{
+        setLoginCheck("Login")
+      }
+    }, [props.loggedUser]);
 
     return (
       <div>
@@ -43,9 +53,11 @@ export default function NavBar(){
             </Typography>
             <div className ={classes.NavItems}>
             <Link to ="/" style={{ textDecoration: 'none' }} ><Button className ={classes.NavButton} >Home</Button></Link>
-            <Link to ="/Post/" style={{ textDecoration: 'none' }}> <Button  className ={classes.NavButton}>Post</Button> </Link>
-            <Link to = "/Login/"style={{ textDecoration: 'none' }} ><Button className ={classes.NavButton} >Login</Button></Link>
-            <Link to = "/Register/" style={{ textDecoration: 'none' }}> <Button className ={classes.NavButton}>Register</Button></Link>
+            <Link to ="/ToolList/" style={{ textDecoration: 'none' }}> <Button  className ={classes.NavButton}>Tools</Button> </Link>
+            {/* <Link to = "/Login/"style={{ textDecoration: 'none' }} ><Button className ={classes.NavButton} >Login</Button></Link>
+            <Link to = "/Register/" style={{ textDecoration: 'none' }}> <Button className ={classes.NavButton}>Register</Button></Link> */}
+            <Link to = "/Account/" style={{ textDecoration: 'none' }}> <Button className ={classes.NavButton}>{loginCheck}</Button></Link>
+
             </div>
           </Toolbar>
         </AppBar>
@@ -53,3 +65,15 @@ export default function NavBar(){
       </div>
     );
 }
+const mapStateToProps = state => {
+  return {
+      loggedUser: state.loggedUser,
+      isFetching: state.isFetching,
+      error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {  }
+)(NavBar)

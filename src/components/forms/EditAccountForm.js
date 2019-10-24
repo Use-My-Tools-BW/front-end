@@ -4,8 +4,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 
 export default function EditAccountForm(props){
-    const [userInfo, setUserInfo] = useState({})
-    const [userCredentials, setCredentails] = useState({
+    const [userCredentials, setCredentials] = useState({
         first_name: "",
         last_name: "",
         email: "",
@@ -18,21 +17,14 @@ export default function EditAccountForm(props){
     const submitHandler = event => {
         event.preventDefault();
         console.log(userCredentials);
-        axiosWithAuth()
-            .put(`https://usemytoolsbw.herokuapp.com/api/auth/user/${props.loggedUser}`, userCredentials)  
-            .then(res => console.log(res))
-            .catch(err => console.log(err.response))
-        
-        console.log(userCredentials, "Edit Form submit handler")
+        props.fetchEditUserInformation(props.loggedUser, userCredentials)
     }
     const changeHandler = event => {
-        setCredentails({ ...userCredentials, [event.target.name]: event.target.value })
+        setCredentials({ ...userCredentials, [event.target.name]: event.target.value })
     }
 
     useEffect(() => {
-        axios
-        .get(`https://usemytoolsbw.herokuapp.com/api/auth/user/${props.loggedUser}`)
-        .then(res => setCredentails(res.data) & console.log(res))
+        setCredentials(props.loggedUserInfo)
     }, []);
 
 

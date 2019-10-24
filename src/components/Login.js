@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 
@@ -14,12 +14,17 @@ const Login = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(login)
+        console.log(login, "login that was passed")
         props.fetchLoginUser(login)
+        props.history.push('/account')
         console.log(props, "props after handleSubmit")
     }
 
-    
+    useEffect(() => {
+        if(props.loggedUser > 0){
+            props.history.push('/account')
+        }
+    }, [props.loggedUser]);
 
     return (
         <div>
@@ -39,7 +44,7 @@ const Login = props => {
                 onChange={handleChange}
                 placeholder="Password"
                 />
-           <Link to ='/account/' ><button type="submit">Log In</button></Link>
+           <button type="submit">Log In</button>
             </form>
             <div>
                 <p>
