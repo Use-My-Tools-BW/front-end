@@ -21,36 +21,36 @@ import Paper from '@material-ui/core/Paper';
 
 function Confirmation(props) {
 
-    const [confirmation, setConfirmation] = useState([]);
+    // const [confirmation, setConfirmation] = useState([]);
     
-    const getTool = () => {
-        return axiosWithAuth()
-        .get()
-            .then(res => {
-                setConfirmation(res.data.tools)
-                console.log(res.data.tools)
-            })
-            .catch(err => console.log(err))
-    };
+    // const getTool = () => {
+    //     return axiosWithAuth()
+    //     .get()
+    //         .then(res => {
+    //             setConfirmation(res.data.tools)
+    //             console.log(res.data.tools)
+    //         })
+    //         .catch(err => console.log(err))
+    // };
 
-    const getToolDetails = () => {
-        return axiosWithAuth()
-        .get()
-            .then(res => {
-                console.log(res.data)
-                setConfirmation([...confirmation])
-            })
-            .catch(err => console.log(err))
-    }
+    // const getToolDetails = () => {
+    //     return axiosWithAuth()
+    //     .get()
+    //         .then(res => {
+    //             console.log(res.data)
+    //             setConfirmation([...confirmation])
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
-    const getTotal = () => {
-        return axiosWithAuth()
-        .get()
-            .then(res => {
-                console.log(res.data)
-            })
-            .catch(err => console.log(err))
-    }
+    // const getTotal = () => {
+    //     return axiosWithAuth()
+    //     .get()
+    //         .then(res => {
+    //             console.log(res.data)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
     // delete functionality here?
 
