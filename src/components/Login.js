@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 import { connect } from "react-redux";
@@ -59,11 +59,18 @@ const Login = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(login)
+        console.log(login, "login that was passed")
         props.fetchLoginUser(login)
+        props.history.push('/account')
         console.log(props, "props after handleSubmit")
     }
 
+
+    useEffect(() => {
+        if(props.loggedUser > 0){
+            props.history.push('/account')
+        }
+    }, [props.loggedUser]);
 
 
     return (
@@ -114,10 +121,12 @@ const Login = props => {
                 value={login.password}
                 onChange={handleChange}
                 placeholder="Password"
+
                 /> */}
            
            <Button className={classes.button} variant="outlined" color="black" type ="submit">Login</Button>
            <div className ={classes.bottomText}>
+
                 <p>
                     Don't have an account?  <Link to='/register/'>Register Now</Link>
                 </p>

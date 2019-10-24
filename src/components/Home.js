@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { axiosWithAuth } from "./utils/axiosWithAuth"
@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { availableTools, toolCategories, homeIcons } from "../data/data"
 
-import { fetchToolListings } from "../actions";
+import { fetchToolListings, fetchAddRentalTool } from "../actions";
 
 /////////////////////////// Material-UI Start
 const useStyles = makeStyles({
@@ -46,17 +46,12 @@ const params = {
 /////////////////////////// Material-UI End
 
 function Home(props) {
+    const [startDate, setStartDate] = useState();
+
     useEffect(() => {
         props.fetchToolListings();
-      }, []);
+    }, []);
 
-
-      const handleRentTool = (cost, toolId, renterId) => event => {
-        axiosWithAuth()
-            .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }
 
     const classes = useStyles();
 
@@ -85,12 +80,32 @@ function Home(props) {
                                 <img width="25%" src={e.img_url} />
                                 <CardContent>
                                     <Typography component="h2">{e.title}</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}/day</p>].map(data => <p>{data}</p>)}</Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary" onClick={handleRentTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
+                            <CardActions style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                                <input 
+                                    type = "text"
+                                    name="start-date"
+                                    value={startDate}
+                                    placeholder="Enter start date"
+                                />
+                                <input 
+                                    type = "text"
+                                    name="end-date"
+
+                                    placeholder="Enter end date"
+                                />
+                                <button onClick={() => console.log(e.startDate)}>check input state</button>
+                                <div>
+                                    <Button variant="contained" color="primary">View</Button>
+                                    <Button variant="contained" color="secondary" onClick={() => {
+                                        props.loggedUser > 0 ? 
+                                            props.fetchAddRentalTool(e.daily_cost, e.id, props.loggedUser)
+                                        :
+                                            props.history.push('/account')
+                                        }}>Rent</Button>
+                                </div>
                             </CardActions>
                         </Card>
                         )}
@@ -118,5 +133,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchToolListings }
+    { fetchToolListings, fetchAddRentalTool }
 )(Home)
