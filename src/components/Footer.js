@@ -12,6 +12,7 @@ root:{
     bottom: '0',
     background: 'black',
     color: 'white',
+    height: '80px'
 },
 
 })

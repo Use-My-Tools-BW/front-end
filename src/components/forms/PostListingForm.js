@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { Link, NavLink } from "react-router-dom";
-
 import { axiosWithAuth } from "../utils/axiosWithAuth"
-
 import { connect } from "react-redux";
 import { addTool, fetchUsersTools } from "../../actions/index"
 
-
+// MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { classes } from 'istanbul-lib-coverage';
+import Button from '@material-ui/core/Button';
 
 // MaterialUI
 
@@ -21,18 +19,31 @@ const useStyles = makeStyles(theme => ({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
+      flexDirection: 'column',
+      alignItems: 'center'
     },
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
+      width: '35%'
     },
     dense: {
       marginTop: theme.spacing(2),
     },
-    menu: {
-      width: 200,
+   
+    button: {
+        margin: theme.spacing(1),
+        marginTop: '2%',
+        marginBottom: '3.2%',
+        width: '15%'
     },
+    input: {
+    display: 'none',
+    },
+    
   }));
+
+
 
 // end of materialUI
 
@@ -102,7 +113,6 @@ return (
                 className={classes.textField}
                 value={tool.model}
                 onChange ={changeHandler}
-             
                 margin="normal"
                 variant ="outlined"
                 placeholder = "Enter Model Here"
@@ -115,7 +125,6 @@ return (
                 className={classes.textField}
                 value={tool.make}
                 onChange ={changeHandler}
-                
                 margin="normal"
                 variant ="outlined"
                 placeholder = "Enter The Manufacturer Here"
@@ -135,10 +144,6 @@ return (
                 placeholder = "Enter The Category Here"
             
              />
-   
-         
-           
-
             <TextField 
                 
                 name="condition"
@@ -149,8 +154,7 @@ return (
                 required
                 margin="normal"
                 variant ="outlined"
-                placeholder = "Enter The Conditon Here"
-            
+                placeholder = "Enter The Conditon Here"      
             />
    
 
@@ -166,17 +170,12 @@ return (
                 required
                 margin="normal"
                 variant ="outlined"
-        
             />
-
-
-
 
             <TextField 
                 
                 name="img_url"
                 label = "Img Url "
-              
                 className={classes.textField}
                 value=  {tool.img_url}
                 onChange ={changeHandler}
@@ -191,7 +190,6 @@ return (
                 id="outlined-dense-multiline"
                 name="description"
                 label = "Description"
-              
                 className={clsx(classes.textField, classes.dense)}
                 value=  {tool.description}
                 onChange ={changeHandler}
@@ -203,10 +201,7 @@ return (
 
                 placeholder = "Enter Your Description Here"
             />
-
-
-
-            <button type ="submit">Upload Your Item</button>
+            <Button className={classes.button} variant="outlined" color="black" type ="submit">Post Your Item</Button>
         </form>
     </div>
 )
