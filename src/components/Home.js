@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 
@@ -66,10 +67,12 @@ function Home(props) {
                 </form>
             </div>
             <div className="featured-products-categories" style={{ height: '100vh', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <div className="categories" style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Swiper {...params}>
+                <div className="categories" onClick={() => props.history.push("ToolList/")} style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Swiper  {...params}>
                         {toolCategories.map(e =>
-                            <div><span class={e.class} data-icon={e.dataIcon} data-inline="false" style={{ fontSize: "6rem", color: '#312A34'}} /><p>{e.name}</p></div>
+                            <div><span class={e.class} data-icon={e.dataIcon} data-inline="false" style={{ fontSize: "6rem", color: '#312A34'}}/><p>{e.name}</p> 
+                            
+                            </div>
                         )}
                     </Swiper>
                 </div>
