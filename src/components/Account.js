@@ -115,8 +115,8 @@ function Account(props) {
     return(
         <>
             <div className="account-section" style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
-                <div className="icon-buttons" style={{ width: '25%', height: '80%', backgroundColor: '#F5F7EA', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
-                        <div onClick={handleOpenAccount} style={{ width: '100%' }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div>
+                <div className="icon-buttons" style={{ width: '25%', height: '85%', backgroundColor: '#F5F7EA', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+                        <div className="edit-account" onClick={handleOpenAccount} style={{ width: '100%' }}><span class="iconify" data-icon="ic:baseline-account-box" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Edit Account</p></div>
                         <Modal
                             aria-labelledby="simple-modal-title"
                             aria-describedby="simple-modal-description"
@@ -127,8 +127,8 @@ function Account(props) {
                                 <EditAccountForm loggedUser={props.loggedUser} loggedUserInfo={props.loggedUserInfo} fetchEditUserInformation={props.fetchEditUserInformation}/>
                             </div>
                         </Modal>
-                        <div style={{ width: '100%' }}><span class="iconify" data-icon="fa-solid:shopping-basket" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Rent Tools</p></div>
-                        <div onClick={handleOpenPostTool} style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div>
+                        <div className="rent-tools" onClick={() => props.history.push("ToolList/")} style={{ width: '100%' }}><span class="iconify" data-icon="fa-solid:shopping-basket" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Rent Tools</p></div>
+                        <div className="lend-your-tool" onClick={() => props.history.push("Post/")} style={{ width: '100%' }}><span class="iconify" data-icon="ic:round-post-add" data-inline="false" style={{ fontSize: "6rem", color: 'black' }} /><p style={{ fontSize: '2.2rem', color: 'black' }}>Lend Your Tool</p></div>
                         <Modal
                             aria-labelledby="simple-modal-title"
                             aria-describedby="simple-modal-description"
@@ -142,7 +142,7 @@ function Account(props) {
 
                 </div>
                 <div className="currently-section" style={{ width: '65%', height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
-                <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}><h3>Tool Rental History</h3></div>
+                <div classname="rental-history" style={{ display: 'flex', flexDirection: 'row-reverse', width: '75%' }}> <Button className="checkout-button" onClick={() => props.history.push("/Confirmation/")}>Checkout</Button><h3>Tool Rental History</h3></div>
                     <div className="currently-renting" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                         <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
                             {props.loggedRentedTools.map(e =>
