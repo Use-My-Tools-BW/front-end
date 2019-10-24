@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from "../components/utils/axiosWithAuth"
 
+import ToolCard from "./ToolCard"
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -57,29 +59,11 @@ export default function FilterSearch(props) {
                     value={query}/>
                 </form>
                 <button type="submit">Search</button>                
-            <div>
-            {queryResults.map(e =>
-            <Card style={{ width:"100%", height:"60%", margin:20, display: "flex" }}>
-                            <CardActionArea>
-                                <img width="25%" src={e.img_url} />
-                                <CardContent>
-                                    <Typography component="h2">{e.title}</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary" onClick={() => props.fetchAddRentalTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
-                            </CardActions>
-                        </Card>
-            )}
-                
-                {/* {
-                    queryResults.map(function(item) {
-                        return <div>{item.title}</div>
-                    })
-                } */}
-            </div>
+                <div>
+                {queryResults.map(e =>
+                    <ToolCard {...e} {...props} history={props.history} />
+                )}
+                </div>
             </div>
         );
         
