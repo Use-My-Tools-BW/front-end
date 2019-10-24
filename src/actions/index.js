@@ -93,6 +93,6 @@ export const fetchAddRentalTool = (cost, toolId, renterId) => dispatch => {
 export const fetchAddNewUser = (newUser) => dispatch => {
     axiosWithAuth()
     .post(`https://usemytoolsbw.herokuapp.com/api/auth/register`, newUser)
-    .then(res => dispatch({ type: FETCH_ADDNEWUSER_SUCCESS, payload: newUser }) & console.log(res.data, "fetchAddNewUser"))
+    .then(res => dispatch({ type: FETCH_ADDNEWUSER_SUCCESS }) & console.log(res.data, "fetchAddNewUser"))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
