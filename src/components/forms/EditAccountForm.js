@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+       
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -75,22 +76,27 @@ export default function EditAccountForm(props){
     return (
         <div>
             <h1>Edit Your Account</h1>
-            <form onSubmit= {submitHandler}>
+            <form className ={classes.container} onSubmit= {submitHandler}>
             <TextField 
                 label ="First Name"
                 variant ="outlined"
+                margin="normal"
                 type="text"
                 name="first_name"
+                className={classes.textField}
                 value={userCredentials.first_name}
                 onChange={changeHandler}
                 placeholder="First Name"
+                
                 
                 />
             <TextField 
                 label ="Last Name"
                 variant ="outlined"
+                margin="normal"
                 type="text"
                 name="last_name"
+                className={classes.textField}
                 value={userCredentials.last_name}
                 onChange={changeHandler}
                 placeholder="Last Name"
@@ -98,8 +104,10 @@ export default function EditAccountForm(props){
             <TextField 
                 label ="Email"
                 variant ="outlined"
+                margin="normal"
                 type="email"
                 name="email"
+                className={classes.textField}
                 value={userCredentials.email}
                 onChange={changeHandler}
                 placeholder="Email"
@@ -108,8 +116,10 @@ export default function EditAccountForm(props){
             <TextField 
                 label ="City"
                 variant ="outlined"
+                margin="normal"
                 type="text"
                 name="city"
+                className={classes.textField}
                 value={userCredentials.city}
                 onChange={changeHandler}
                 placeholder="City"
@@ -118,8 +128,10 @@ export default function EditAccountForm(props){
             <TextField 
                 label ="State"
                 variant ="outlined"
+                margin="normal"
                 type="text"
                 name="state"
+                className={classes.textField}
                 value={userCredentials.state}
                 onChange={changeHandler}
                 placeholder="State"
@@ -128,8 +140,10 @@ export default function EditAccountForm(props){
             <TextField 
                 label ="Zip"
                 variant ="outlined"
+                margin="normal"
                 type="number"
                 name="zip"
+                className={classes.textField}
                 value={userCredentials.zip}
                 onChange={changeHandler}
                 placeholder="Zip"
@@ -137,13 +151,15 @@ export default function EditAccountForm(props){
             <TextField 
                 label ="Password"
                 variant ="outlined"
+                margin="normal"
                 type="password"
                 name="password"
+                className={classes.textField}
                 value={userCredentials.password}
                 onChange={changeHandler}
                 placeholder="Password"
                 />
-                <button type ="submit">Edit</button>
+                <Button className ={classes.button} variant="outlined" color="black" type ="submit">Edit</Button>
             </form>
         </div>
     )

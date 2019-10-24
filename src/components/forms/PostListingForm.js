@@ -64,13 +64,8 @@ const useStyles = makeStyles(theme => ({
 
 function PostListingForm(props){
     
-    // MaterialUI
-    
     const classes = useStyles();
 
-   
-
-// End of MaterialUI
 
 const [tool, setTool] = useState({
     user_id: 0,
@@ -110,6 +105,8 @@ return (
         <button onClick={() => console.log(props)}>View Props</button>
         <h1>Post Your Tools!</h1>
         <form className ={classes.container} onSubmit ={submitHandler}>
+          
+     
             <TextField
                 name="title"
                 label = "Item"
