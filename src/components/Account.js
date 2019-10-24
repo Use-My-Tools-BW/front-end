@@ -109,7 +109,7 @@ function Account(props) {
         } else{
             props.history.push('/Login')
         }
-    }, [props.loggedUser]);
+    }, [props.loggedUser, props.loggedRentedTools, props.loggedPostedTools]);
 
 
     return(

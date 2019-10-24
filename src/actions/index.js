@@ -69,7 +69,7 @@ export const fetchEditUserInformation = (id, newInfo) => dispatch => {
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
 // Used at Account
-export const fetchCreateLendPost = (newPost) => dispatch => {
+export const fetchCreateLendPost = (newPost) => dispatch => { 
     axiosWithAuth()
     .post("https://usemytoolsbw.herokuapp.com/api/tools", newPost)
     .then(res => dispatch({ type: FETCH_CREATELENDPOST_SUCCESS, payload: newPost }) & console.log(res.data, "fetchCreateLendPost"))
@@ -83,9 +83,9 @@ export const fetchDeleteLendPost = (id) => dispatch => {
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
 // Used at HOME and TOOLLIST
-export const fetchAddRentalTool = (cost, toolId, renterId) => dispatch => {
+export const fetchAddRentalTool = (cost, toolId, renterId, start, end) => dispatch => {
     axiosWithAuth()
-    .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
+    .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date: start, end_date: end, total_cost: cost, tool_id: toolId, renter_id: renterId})
     .then(res => dispatch({ type: FETCH_ADDRENTTOOL_SUCCESS, payload: res.data })& console.log(res.data, "fetchAddRentalTool"))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
