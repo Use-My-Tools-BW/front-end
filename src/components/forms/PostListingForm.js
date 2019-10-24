@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { Link, NavLink } from "react-router-dom";
-
 import { axiosWithAuth } from "../utils/axiosWithAuth"
-
 import { connect } from "react-redux";
 import { fetchCreateLendPost } from "../../actions/index"
 
-
+// MaterialUI
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { classes } from 'istanbul-lib-coverage';
+import Button from '@material-ui/core/Button';
 
 // MaterialUI
 
@@ -21,18 +19,31 @@ const useStyles = makeStyles(theme => ({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
+      flexDirection: 'column',
+      alignItems: 'center'
     },
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
+      width: '35%'
     },
     dense: {
       marginTop: theme.spacing(2),
     },
-    menu: {
-      width: 200,
+   
+    button: {
+        margin: theme.spacing(1),
+        marginTop: '2%',
+        marginBottom: '3.2%',
+        width: '15%'
     },
+    input: {
+    display: 'none',
+    },
+    
   }));
+
+
 
 // end of materialUI
 
@@ -40,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 
 function PostListingForm(props){
+    const classes = useStyles();
 const [tool, setTool] = useState({
     user_id: 0,
     title: "",
@@ -78,92 +90,114 @@ return (
         <button onClick={() => console.log(props)}>View Props</button>
         <h1>Post Your Tools!</h1>
         <form className ={classes.container} onSubmit ={submitHandler}>
-            {/* <textField 
-            label ="Item"
-            classNamme={classes.textField}
-            value ={tool.title}
-            onChange ={changeHandler}
-            margin = "normal"
-            variant ="outlined"
-            /> */}
-
-            <label>
-                Title:
-                <input 
-                type = "text"
+            <TextField
                 name="title"
+                label = "Item"
+                className={classes.textField}
                 value={tool.title}
-                onChange={changeHandler}
+                onChange ={changeHandler}
                 required
-                />
-            </label>
-            <label>
-                Model:
-                <input 
-                type = "text"
+                margin="normal"
+                variant ="outlined"
+                placeholder = "Enter Item Here"
+           />
+    
+            <TextField 
+            
                 name="model"
+                label = "Model"
+                className={classes.textField}
                 value={tool.model}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                Manufacturer:
-                <input 
-                type = "text"
+                onChange ={changeHandler}
+                margin="normal"
+                variant ="outlined"
+                placeholder = "Enter Model Here"
+           />
+        
+            <TextField 
+            
                 name="make"
+                label = "Manufacturer"
+                className={classes.textField}
                 value={tool.make}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-               Category:
-                <input 
-                type = "text"
+                onChange ={changeHandler}
+                margin="normal"
+                variant ="outlined"
+                placeholder = "Enter The Manufacturer Here"
+           />
+       
+        
+            <TextField 
+                
                 name="category"
+                label = "Category"
+                className={classes.textField}
                 value={tool.category}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                Condition:
-                <input 
-                type = "text"
+                onChange ={changeHandler}
+                required
+                margin="normal"
+                variant ="outlined"
+                placeholder = "Enter The Category Here"
+            
+             />
+            <TextField 
+                
                 name="condition"
+                label = "Conditon"
+                className={classes.textField}
                 value={tool.condition}
-                onChange={changeHandler}
-                />
-            </label>
-            <label>
-                Total Cost:
-                <input 
-                type = "number"
+                onChange ={changeHandler}
+                required
+                margin="normal"
+                variant ="outlined"
+                placeholder = "Enter The Conditon Here"      
+            />
+   
+
+
+            <TextField 
+                
                 name="daily_cost"
-                value={tool.daily_cost}
-                onChange={changeHandler}
+                label = "$ Cost Per Day "
+                type = "number"
+                className={classes.textField}
+                value=  {tool.daily_cost}
+                onChange ={changeHandler}
                 required
-                />
-            </label>
-            <label>
-                Image URL
-                <input 
-                type = "text"
+                margin="normal"
+                variant ="outlined"
+            />
+
+            <TextField 
+                
                 name="img_url"
-                value={tool.img_url}
-                onChange={changeHandler}
+                label = "Img Url "
+                className={classes.textField}
+                value=  {tool.img_url}
+                onChange ={changeHandler}
                 required
-                />
-            </label>
-            <label>
-                Description
-                <input 
-                type = "text"
+                margin="normal"
+                variant ="outlined"
+                placeholder = "https://www.google.com/"
+            />
+
+           
+            <TextField 
+                id="outlined-dense-multiline"
                 name="description"
-                value={tool.description}
-                onChange={changeHandler}
+                label = "Description"
+                className={clsx(classes.textField, classes.dense)}
+                value=  {tool.description}
+                onChange ={changeHandler}
                 required
-                />
-            </label>
-            <button type ="submit">Upload Your Item</button>
+                margin="normal"
+                variant ="outlined"
+                multiline
+                rowsMax="4"
+
+                placeholder = "Enter Your Description Here"
+            />
+            <Button className={classes.button} variant="outlined" color="black" type ="submit">Post Your Item</Button>
         </form>
     </div>
 )
