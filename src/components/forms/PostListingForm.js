@@ -12,7 +12,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { classes } from 'istanbul-lib-coverage';
 import Button from '@material-ui/core/Button';
-
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 // MaterialUI
 
 const useStyles = makeStyles(theme => ({
@@ -34,13 +36,23 @@ const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         marginTop: '2%',
-        marginBottom: '3.2%',
+        marginBottom: '4.3%',
         width: '15%'
     },
     input: {
     display: 'none',
     },
-    
+    DropdownBoxContainer: {
+        marginTop: '1%',
+        display: 'flex',
+        flexDirection: 'row',
+        width: '35%',
+        justifyContent: "space-around"
+    },
+    DropdownBox: {
+     width: '200px',
+        
+    }
   }));
 
 
@@ -51,7 +63,15 @@ const useStyles = makeStyles(theme => ({
 
 
 function PostListingForm(props){
+    
+    // MaterialUI
+    
     const classes = useStyles();
+
+   
+
+// End of MaterialUI
+
 const [tool, setTool] = useState({
     user_id: 0,
     title: "",
@@ -125,36 +145,7 @@ return (
                 variant ="outlined"
                 placeholder = "Enter The Manufacturer Here"
            />
-       
         
-            <TextField 
-                
-                name="category"
-                label = "Category"
-                className={classes.textField}
-                value={tool.category}
-                onChange ={changeHandler}
-                required
-                margin="normal"
-                variant ="outlined"
-                placeholder = "Enter The Category Here"
-            
-             />
-            <TextField 
-                
-                name="condition"
-                label = "Conditon"
-                className={classes.textField}
-                value={tool.condition}
-                onChange ={changeHandler}
-                required
-                margin="normal"
-                variant ="outlined"
-                placeholder = "Enter The Conditon Here"      
-            />
-   
-
-
             <TextField 
                 
                 name="daily_cost"
@@ -180,8 +171,6 @@ return (
                 variant ="outlined"
                 placeholder = "https://www.google.com/"
             />
-
-           
             <TextField 
                 id="outlined-dense-multiline"
                 name="description"
@@ -194,9 +183,55 @@ return (
                 variant ="outlined"
                 multiline
                 rowsMax="4"
-
                 placeholder = "Enter Your Description Here"
             />
+
+            <div className = {classes.DropdownBoxContainer}>
+            <FormControl  className={classes.formControl}>
+            
+            <InputLabel className ="DropdownLabel">Category</InputLabel>
+            <Select 
+               name="category"
+               label = "Category"
+               className = {classes.DropdownBox}
+               value={tool.category}
+               onChange ={changeHandler}
+               required
+               margin="normal"
+               placeholder = "Enter The Category Here"
+           >     
+               <MenuItem value={"POWER TOOLS"}>Power Tools</MenuItem>
+               <MenuItem value={"HAND TOOLS"}>Hand Tools</MenuItem>
+               <MenuItem value={"AUTOMOTIVE"}>Automotive</MenuItem>
+               <MenuItem value={"WELDING & SOLDERING"}>Welding and Soldering</MenuItem>
+               <MenuItem value={"LADDERS & SCAFFOLDING"}>Ladders and Scaffolding</MenuItem>
+            </Select>
+            </FormControl>
+   
+            <FormControl   className={classes.formControl}>
+            <InputLabel className ="DropdownLabel">Conditon</InputLabel>
+            <Select 
+               
+               name="condition"
+               label = "Conditon"
+               className = {classes.DropdownBox}
+               value={tool.condition}
+               onChange ={changeHandler}
+               required
+               margin="normal"
+               
+               placeholder = "Enter The Conditon Here"      
+           >
+               <MenuItem value={"Poor"}>Poor</MenuItem>
+               <MenuItem value={"fair"}>Fair</MenuItem>
+               <MenuItem value={"good"}>Good</MenuItem>
+               <MenuItem value={"excellent"}>Excellent</MenuItem>
+                    
+           </Select>
+       </FormControl>
+       </div>
+
+
             <Button className={classes.button} variant="outlined" color="black" type ="submit">Post Your Item</Button>
         </form>
     </div>

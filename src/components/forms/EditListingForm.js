@@ -73,7 +73,7 @@ return (
                 onChange={changeHandler}
                 />
             </label>
-            <label>
+            {/* <label>
                Category:
                 <input 
                 type = "text"
@@ -81,8 +81,8 @@ return (
                 value={tool.category}
                 onChange={changeHandler}
                 />
-            </label>
-            <label>
+            </label> */}
+            {/* <label>
                 Condition:
                 <input 
                 type = "text"
@@ -90,7 +90,7 @@ return (
                 value={tool.condition}
                 onChange={changeHandler}
                 />
-            </label>
+            </label> */}
             <label>
                 Total Cost:
                 <input 
