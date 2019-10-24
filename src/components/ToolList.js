@@ -6,6 +6,7 @@ import { axiosWithAuth } from "../components/utils/axiosWithAuth"
 import { fetchToolListings, fetchAddRentalTool } from "../actions";
 
 import FilterSearch from './FilterSearch';
+import ToolCard from "./ToolCard"
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -55,23 +56,11 @@ class ToolList extends React.Component {
         <>
             <h2>Tool List</h2>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap' }}>
-            <FilterSearch tools={this.props.tools} loggedUser={this.props.loggedUser} fetchAddRentalTool={this.props.fetchAddRentalTool}/>
+            <FilterSearch tools={this.props.tools} loggedUser={this.props.loggedUser} fetchAddRentalTool={this.props.fetchAddRentalTool} history={this.props.history}/>
 
                 <div className="featured-tools" style={{ width: '80vw', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {this.props.tools.map(e =>
-                        <Card style={{ width:"35%", height:"45%", margin:20 }}>
-                            <CardActionArea>
-                                <img width="25%" src={e.img_url} />
-                                <CardContent>
-                                    <Typography component="h2">{e.title}</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary">Rent</Button>
-                            </CardActions>
-                        </Card>
+                        <ToolCard {...e} history={this.props.history}/>
                         )}
                 </div>
             </div>

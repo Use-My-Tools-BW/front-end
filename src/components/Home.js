@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { axiosWithAuth } from "./utils/axiosWithAuth"
 
+import ToolCard from "./ToolCard"
+
 import Swiper from 'react-id-swiper';
 
 /////////////////////////// Material-UI Start
@@ -53,6 +55,10 @@ function Home(props) {
         props.fetchToolListings();
     }, []);
 
+    const changeHandler = event => {
+        setStartDate(event.target.value)
+        console.log(startDate)
+    }
 
     const classes = useStyles();
 
@@ -66,9 +72,11 @@ function Home(props) {
                     <button type="submit">Search</button>
                 </form>
             </div>
+
             <div className="featured-products-categories" style={{ height: '100vh', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <div className="categories" onClick={() => props.history.push("ToolList/")} style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Swiper  {...params}>
+
                         {toolCategories.map(e =>
                             <div><span class={e.class} data-icon={e.dataIcon} data-inline="false" style={{ fontSize: "6rem", color: '#312A34'}}/><p>{e.name}</p> 
                             
@@ -76,41 +84,9 @@ function Home(props) {
                         )}
                     </Swiper>
                 </div>
-                <div className="featured-products" style={{ height: '80vh', width: '80vw', alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <div className="featured-products" style={{ width: '80vw', alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {props.tools.slice(0, 4).map(e =>
-                        <Card className={classes.card}>
-                            <CardActionArea>
-                                <img width="25%" src={e.img_url} />
-                                <CardContent>
-                                    <Typography component="h2">{e.title}</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}/day</p>].map(data => <p>{data}</p>)}</Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                                <input 
-                                    type = "text"
-                                    name="start-date"
-                                    value={startDate}
-                                    placeholder="Enter start date"
-                                />
-                                <input 
-                                    type = "text"
-                                    name="end-date"
-
-                                    placeholder="Enter end date"
-                                />
-                                <button onClick={() => console.log(e.startDate)}>check input state</button>
-                                <div>
-                                    <Button variant="contained" color="primary">View</Button>
-                                    <Button variant="contained" color="secondary" onClick={() => {
-                                        props.loggedUser > 0 ? 
-                                            props.fetchAddRentalTool(e.daily_cost, e.id, props.loggedUser)
-                                        :
-                                            props.history.push('/account')
-                                        }}>Rent</Button>
-                                </div>
-                            </CardActions>
-                        </Card>
+                        <ToolCard {...e} fetchAddRentalTool={props.fetchAddRentalTool} loggedUser={props.loggedUser} history={props.history}/>
                         )}
                 </div>
             </div>
