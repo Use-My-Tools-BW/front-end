@@ -170,6 +170,8 @@ return (
             />
             <TextField 
                 id="outlined-dense-multiline"
+                rows ={2}
+                rowsMax= {6}
                 name="description"
                 label = "Description"
                 className={clsx(classes.textField, classes.dense)}

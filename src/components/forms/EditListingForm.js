@@ -186,6 +186,8 @@ return (
           
           <TextField 
                 id="outlined-dense-multiline"
+                rows ={2}
+                rowsMax= {6}
                 variant ="outlined"
                 margin="normal"
                 label = "Description"
