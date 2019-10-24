@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { availableTools, toolCategories, homeIcons } from "../data/data"
 
-import { fetchToolListings } from "../actions";
+import { fetchToolListings, fetchAddRentalTool } from "../actions";
 
 /////////////////////////// Material-UI Start
 const useStyles = makeStyles({
@@ -48,15 +48,8 @@ const params = {
 function Home(props) {
     useEffect(() => {
         props.fetchToolListings();
-      }, []);
+    }, []);
 
-
-      const handleRentTool = (cost, toolId, renterId) => event => {
-        axiosWithAuth()
-            .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }
 
     const classes = useStyles();
 
@@ -90,7 +83,7 @@ function Home(props) {
                             </CardActionArea>
                             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary" onClick={handleRentTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
+                                <Button variant="contained" color="secondary" onClick={() => props.fetchAddRentalTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
                             </CardActions>
                         </Card>
                         )}
@@ -118,5 +111,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchToolListings }
+    { fetchToolListings, fetchAddRentalTool }
 )(Home)

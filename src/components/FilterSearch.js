@@ -30,17 +30,13 @@ export default function FilterSearch(props) {
         // this.setState({items: items})
         // console.log(this.state)
         setQuery(event.target.value)
+        if (event.target.value===""){
+                setQuery()
+            }
         console.log(queryResults)
         console.log(props)
     }
 
-    
-    const handleRentTool = (cost, toolId, renterId) => event => {
-        axiosWithAuth()
-            .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }
 
      useEffect (() => {
         const data = props.tools
@@ -62,7 +58,7 @@ export default function FilterSearch(props) {
                 </form>
                 <button type="submit">Search</button>                
             <div>
-            {props.tools.map(e =>
+            {queryResults.map(e =>
             <Card style={{ width:"100%", height:"60%", margin:20, display: "flex" }}>
                             <CardActionArea>
                                 <img width="25%" src={e.img_url} />
@@ -73,7 +69,7 @@ export default function FilterSearch(props) {
                             </CardActionArea>
                             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button variant="contained" color="primary">View</Button>
-                                <Button variant="contained" color="secondary" onClick={handleRentTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
+                                <Button variant="contained" color="secondary" onClick={() => props.fetchAddRentalTool(e.daily_cost, e.id, props.loggedUser)}>Rent</Button>
                             </CardActions>
                         </Card>
             )}

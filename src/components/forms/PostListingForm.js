@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 import { connect } from "react-redux";
-import { addTool, fetchUsersTools } from "../../actions/index"
+import { fetchCreateLendPost } from "../../actions/index"
 
 
 import clsx from 'clsx';
@@ -60,11 +60,7 @@ useEffect(() => {
 const submitHandler = event => {
     event.preventDefault();
     console.log(tool)
-    axiosWithAuth()
-        .post("https://usemytoolsbw.herokuapp.com/api/tools", tool)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.response));
-    // props.addTool(tool)
+    props.fetchCreateLendPost(tool)
 }
 
 
@@ -184,5 +180,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { addTool, fetchUsersTools }
+    { fetchCreateLendPost }
 )(PostListingForm)

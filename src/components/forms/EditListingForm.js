@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 
 export default function EditListingForm(props){
     const [tool, setTool] = useState({
-        title: props.tool.title,
-        description:props.tool.description,
-        make: props.tool.make,
-        model: props.tool.model,
-        img_url: props.tool.img_url,
-        daily_cost: props.tool.daily_cost,
-        available: props.tool.available,
-        condition: props.tool.daily_cost,     
-        category: props.tool.category
+        title: "",
+        description: "",
+        make: "",
+        model: "",
+        img_url: "",
+        daily_cost: 0,
+        available: false,
+        condition: "",     
+        category: ""
     });
-// Try doing a useEffect hook that has axios .get(api/tools/props.tool.id) and sets the results to state and uses that to populate input fields
-// First, get PUT requests to work
+
+
+    useEffect(() => {
+        setTool(props.tool)
+    }, [props.tool]);
 
 const submitHandler = event => {
     event.preventDefault();

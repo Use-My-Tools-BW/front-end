@@ -5,17 +5,20 @@ export const START_FETCHING = "START_FETCHING";
 
 export const FETCH_TOOLLIST_SUCCESS = "FETCH_TOOLLIST_SUCCESS";
 export const FETCH_LOGIN_SUCCESS = "FETCH_LOGIN_SUCCESS";
-export const FETCH_EDITUSER_SUCCESS = "FETCH_EDITUSER_SUCCESS";
-export const FETCH_ADDTOOL_SUCCESS = "FETCH_ADDTOOL_SUCCESS";
-export const FETCH_USERSTOOLS_SUCCESS = "FETCH_USERSTOOLS_SUCCESS";
-export const FETCH_DELETETOOL_SUCCESS = "FETCH_DELETETOOL_SUCCESS"
-export const FETCH_USERDETAILS_SUCCESS = "FETCH_USERDETAILS_SUCCESS"
+export const FETCH_LENDPOSTS_SUCCESS = "FETCH_LENDPOSTS_SUCCESS";
+export const FETCH_RENTEDTOOLS_SUCCESS = "FETCH_RENTEDTOOLS_SUCCESS";
+export const FETCH_USERINFO_SUCCESS = "FETCH_USERINFO_SUCCESS";
+export const FETCH_EDITUSERINFO_SUCCESS = "FETCH_EDITUSERINFO_SUCCESS";
+export const FETCH_CREATELENDPOST_SUCCESS = "FETCH_CREATELENDPOST_SUCCESS";
+export const FETCH_DELETELENDPOST_SUCCESS = "FETCH_DELETELENDPOST_SUCCESS";
+export const FETCH_ADDRENTTOOL_SUCCESS = "FETCH_ADDRENTTOOL_SUCCESS";
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
 export const ADD_TOOL = "ADD_TOOL"
 export const ADD_TOOL_SUCCESS = "ADD_TOOL_SUCCESS"
 export const ADD_TOOL_FAILED = "ADD_TOOL_FAILED"
 
+// Used at HOME and TOOLLIST
 export const fetchToolListings = () => dispatch => {
     dispatch({ type: START_FETCHING });
     axios
@@ -23,6 +26,8 @@ export const fetchToolListings = () => dispatch => {
     .then(res => dispatch({ type: FETCH_TOOLLIST_SUCCESS, payload: res.data }) & console.log(res.data, "Data returned from fetchToolListings action and set to state."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
+
+// Used at LOGIN
 export const fetchLoginUser = (login) => dispatch => {
     dispatch({ type: START_FETCHING });
     axiosWithAuth()
@@ -30,48 +35,56 @@ export const fetchLoginUser = (login) => dispatch => {
     .then(res => dispatch({ type: FETCH_LOGIN_SUCCESS, payload: res.data.userId }) & localStorage.setItem("token", res.data.token) & console.log(res.data.userId, "Data returned from fetchLoginSuccess action and set to state."))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
-export const fetchEditUser = (obj) => dispatch => {
-    // fetchEditUser is invokes with new user's object parameters
+// Used at ACCOUNT
+export const fetchLendPosts = (id) => dispatch => {
     dispatch({ type: START_FETCHING });
     axiosWithAuth()
-    .put(`http://url:port/api/register/${obj.id}`)
-    // obj callback will be sent into the action.payload instead of the endpoint's response data
-    .then(res => dispatch({ type: FETCH_EDITUSER_SUCCESS, payload: obj }) & console.log(res, "Data returned from fetchEditUser action and set to state. No data in response required. You should change loggedUser in redux store to reflect the object sent."))
+    .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${id}`)
+    .then(res => dispatch({ type: FETCH_LENDPOSTS_SUCCESS, payload: res.data }) & console.log(res, "fetchLendPosts"))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
-
-/////Need to come back and get this to work with PostListingForm .... although it's not needed.
-export const addTool = (tool) => dispatch => {
-    // Tried adding the header through here instead... no luck
-    // const token = localStorage.getItem("token")
-    // const headers = {Authorization: token}
-    dispatch({ type: START_FETCHING });
-    axios
-    .post(`https://usemytoolsbw.herokuapp.com/api/tools`, tool)
-    .then(res => dispatch({ type: FETCH_ADDTOOL_SUCCESS, payload: res.data }) & console.log(res, "Data returned from fetchAddTool action and set to state. No data in response required. You should change loggedUser in redux store to reflect the object sent."))
-    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }) & console.log(tool))
-}
-
-export const fetchUsersTools = (id) => dispatch => {
-    dispatch({ type: START_FETCHING });
-    axios
-    .get(`https://usemytoolsbw.herokuapp.com/api/tools/user/${id}`)
-    .then(res => dispatch({ type: FETCH_USERSTOOLS_SUCCESS, payload: res.data }) & console.log(res, "Data returned from fetchUsersTools action and set to state."))
-    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }) & console.log(err))
-}
-
-export const fetchDeleteTools = (id) => dispatch => {
+// Used at ACCOUNT
+export const fetchRentedTools = (id) => dispatch => {
     dispatch({ type: START_FETCHING });
     axiosWithAuth()
-    .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`)
-    .then(res => dispatch({ type: FETCH_DELETETOOL_SUCCESS }) & console.log(res))
-    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err }))
+    .get(`https://usemytoolsbw.herokuapp.com/api/rentals/renter/${id}`)
+    .then(res => dispatch({ type: FETCH_RENTEDTOOLS_SUCCESS, payload: res.data }) & console.log(res, "fetchRentedTools"))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
-
-export const fetchUserDetails = (id) => dispatch => {
+// Used at Account
+export const fetchUserInformation = (id) => dispatch => {
     dispatch({ type: START_FETCHING });
-    axios
+    axiosWithAuth()
     .get(`https://usemytoolsbw.herokuapp.com/api/auth/user/${id}`)
-    .then(res => dispatch({ type: FETCH_USERDETAILS_SUCCESS, payload: res.data })& console.log(res, "fetchUserDetails"))
+    .then(res => dispatch({ type: FETCH_USERINFO_SUCCESS, payload: res.data })& console.log(res.data, "fetchUserInformation"))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
+}
+// Used at EditAccountForm
+export const fetchEditUserInformation = (id, newInfo) => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axiosWithAuth()
+    .put(`https://usemytoolsbw.herokuapp.com/api/auth/user/${id}`, newInfo)
+    .then(res => dispatch({ type: FETCH_EDITUSERINFO_SUCCESS, payload: newInfo }) & console.log(res.data, "fetchEditUserInformation"))  
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
+}
+// Used at Account
+export const fetchCreateLendPost = (newPost) => dispatch => {
+    axiosWithAuth()
+    .post("https://usemytoolsbw.herokuapp.com/api/tools", newPost)
+    .then(res => dispatch({ type: FETCH_CREATELENDPOST_SUCCESS, payload: newPost }) & console.log(res.data, "fetchCreateLendPost"))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
+}
+// Used at Account
+export const fetchDeleteLendPost = (id) => dispatch => {
+    axiosWithAuth()
+    .delete(`https://usemytoolsbw.herokuapp.com/api/tools/${id}`)
+    .then(res => dispatch({ type: FETCH_DELETELENDPOST_SUCCESS, payload: id }) & console.log(res.data, "fetchDeleteLendPost"))
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
+}
+// Used at HOME and TOOLLIST
+export const fetchAddRentalTool = (cost, toolId, renterId) => dispatch => {
+    axiosWithAuth()
+    .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date:"2019-11-20", end_date:"2019-11-22", total_cost: cost, tool_id: toolId, renter_id: renterId})
+    .then(res => dispatch({ type: FETCH_ADDRENTTOOL_SUCCESS, payload: res.data })& console.log(res.data, "fetchAddRentalTool"))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }

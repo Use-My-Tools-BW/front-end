@@ -14,8 +14,9 @@ const Login = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(login)
+        console.log(login, "login that was passed")
         props.fetchLoginUser(login)
+        props.history.push('/account')
         console.log(props, "props after handleSubmit")
     }
 
@@ -39,7 +40,7 @@ const Login = props => {
                 onChange={handleChange}
                 placeholder="Password"
                 />
-           <Link to ='/account/' ><button type="submit">Log In</button></Link>
+           <button type="submit">Log In</button>
             </form>
             <div>
                 <p>
