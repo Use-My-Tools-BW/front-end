@@ -1,4 +1,4 @@
-import { START_FETCHING, FETCH_TOOLLIST_SUCCESS, FETCH_USERSTOOLS_SUCCESS, FETCH_ADDTOOL_SUCCESS, FETCH_LOGIN_SUCCESS, FETCH_EDITUSER_SUCCESS, FETCH_DELETETOOL_SUCCESS, FETCH_USERDETAILS_SUCCESS, FETCH_FAILURE } from "../actions"
+import { START_FETCHING, FETCH_LENDPOSTS_SUCCESS, FETCH_ADDNEWUSER_SUCCESS, FETCH_ADDRENTTOOL_SUCCESS, FETCH_CREATELENDPOST_SUCCESS, FETCH_DELETELENDPOST_SUCCESS, FETCH_EDITUSERINFO_SUCCESS, FETCH_RENTEDTOOLS_SUCCESS, FETCH_USERINFO_SUCCESS, FETCH_TOOLLIST_SUCCESS, FETCH_LOGIN_SUCCESS, FETCH_FAILURE } from "../actions"
 
 const initialState = {
     tools: [],
@@ -32,39 +32,59 @@ const reducer = (state = initialState, action) => {
                 error: "",
                 loggedUser: action.payload
             }
-        case FETCH_ADDTOOL_SUCCESS:
-            return {
-                ...state,
-                isFetching: false,
-                error: "",
-                tools: [...state.tools, action.payload]
-            }
-        case FETCH_USERSTOOLS_SUCCESS:
+        case FETCH_LENDPOSTS_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 error: "",
                 loggedPostedTools: action.payload
             }
-        case FETCH_USERDETAILS_SUCCESS:
+        case FETCH_RENTEDTOOLS_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                error: "",
+                loggedRentedTools: action.payload
+            }
+        case FETCH_USERINFO_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 error: "",
                 loggedUserInfo: action.payload
             }
-        case FETCH_EDITUSER_SUCCESS:
+        case FETCH_ADDNEWUSER_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 error: "",
-                loggedUser: action.payload
             }
-        case FETCH_DELETETOOL_SUCCESS:
+        case FETCH_EDITUSERINFO_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                error: ""
+                error: "",
+                loggedUserInfo: action.payload
+            }
+        case FETCH_CREATELENDPOST_SUCCESS:
+            return{
+                ...state,
+                isFetching: false,
+                error: "",
+                loggedPostedTools: [...state.loggedPostedTools, action.payload]
+            }
+        case FETCH_DELETELENDPOST_SUCCESS:
+            return{
+                ...state,
+                isFetching: false,
+                error: "",
+                loggedPostedTools: state.loggedPostedTools.filter(e => e !== action.payload)
+            }
+        case FETCH_ADDRENTTOOL_SUCCESS:
+            return{
+                ...state,
+                isFetching: false,
+                error: "",
             }
         case FETCH_FAILURE:
             return {

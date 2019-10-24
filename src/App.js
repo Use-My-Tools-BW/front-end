@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+
 
 import Login from "./components/Login";
 import RegisterForm from './components/RegisterForm';
@@ -15,10 +17,10 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-
+      <button onClick={() => console.log(props)}>check store</button>
      <NavBar />
         {/* <Route exact path="/" component={Login}/>
         <Route exact path="/" component={RegisterForm}/>
@@ -47,4 +49,19 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      loggedUser: state.loggedUser,
+      tools: state.tools,
+      loggedPostedTools: state.loggedPostedTools,
+      loggedRentedTools: state.loggedRentedTools,
+      loggedUserInfo: state.loggedUserInfo,
+      isFetching: state.isFetching,
+      error: state.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { }
+)(App)

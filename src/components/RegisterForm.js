@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
+import { fetchAddNewUser } from "../actions/index"
 
 // MaterialUI
 import clsx from 'clsx';
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 // end of materialUI
 
-export default function RegisterForm(props) {
+function RegisterForm(props) {
     const classes = useStyles();
     const [userCredentials, setCredentials] = useState ({
         first_name: "",
@@ -52,18 +53,17 @@ export default function RegisterForm(props) {
         zip: "",
     });
 
+        useEffect(() => {
+        if(props.loggedUser > 0){
+            props.history.push('/account')
+        }
+    }, []);
+
     const submitHandler = event => {
         
         event.preventDefault();
         console.log(userCredentials);
-
-        axios
-        .post("https://usemytoolsbw.herokuapp.com/api/auth/register", userCredentials)  //Ready for backend
-            .then(res => {
-                console.log(res);
-                // props.history.push("/");
-            })
-            .catch(err => console.log(err.response))
+        props.fetchAddNewUser(userCredentials)
     }
 
     const changeHandler = event => {
@@ -168,3 +168,16 @@ export default function RegisterForm(props) {
     )
     
 }
+
+const mapStateToProps = state => {
+    return {
+        isFetching: state.isFetching,
+        error: state.error,
+        loggedUser: state.loggedUser
+    };
+  };
+
+export default connect(
+    mapStateToProps,
+    { fetchAddNewUser }
+)(RegisterForm)
