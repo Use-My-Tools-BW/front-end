@@ -57,7 +57,7 @@ class ToolList extends React.Component {
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap' }}>
             <FilterSearch tools={this.props.tools} loggedUser={this.props.loggedUser} fetchAddRentalTool={this.props.fetchAddRentalTool}/>
 
-                <div className="featured-tools" style={{ width: '80vw', height: '100vh', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
+                <div className="featured-tools" style={{ width: '80vw', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                     {this.props.tools.map(e =>
                         <Card style={{ width:"35%", height:"45%", margin:20 }}>
                             <CardActionArea>

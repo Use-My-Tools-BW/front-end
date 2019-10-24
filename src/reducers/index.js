@@ -1,4 +1,4 @@
-import { START_FETCHING, FETCH_LENDPOSTS_SUCCESS, FETCH_ADDRENTTOOL_SUCCESS, FETCH_CREATELENDPOST_SUCCESS, FETCH_DELETELENDPOST_SUCCESS, FETCH_EDITUSERINFO_SUCCESS, FETCH_RENTEDTOOLS_SUCCESS, FETCH_USERINFO_SUCCESS, FETCH_TOOLLIST_SUCCESS, FETCH_LOGIN_SUCCESS, FETCH_FAILURE } from "../actions"
+import { START_FETCHING, FETCH_LENDPOSTS_SUCCESS, FETCH_ADDNEWUSER_SUCCESS, FETCH_ADDRENTTOOL_SUCCESS, FETCH_CREATELENDPOST_SUCCESS, FETCH_DELETELENDPOST_SUCCESS, FETCH_EDITUSERINFO_SUCCESS, FETCH_RENTEDTOOLS_SUCCESS, FETCH_USERINFO_SUCCESS, FETCH_TOOLLIST_SUCCESS, FETCH_LOGIN_SUCCESS, FETCH_FAILURE } from "../actions"
 
 const initialState = {
     tools: [],
@@ -52,6 +52,12 @@ const reducer = (state = initialState, action) => {
                 isFetching: false,
                 error: "",
                 loggedUserInfo: action.payload
+            }
+        case FETCH_ADDNEWUSER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                error: "",
             }
         case FETCH_EDITUSERINFO_SUCCESS:
             return {

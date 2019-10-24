@@ -56,6 +56,7 @@ const params = {
   
   const useStyles = makeStyles(theme => ({
     card: {
+        width: "35%"
     },
     paper: {
       position: 'absolute',
@@ -105,6 +106,8 @@ function Account(props) {
         props.fetchRentedTools(props.loggedUser)
         props.fetchUserInformation(props.loggedUser)
         props.fetchToolListings()
+        } else{
+            props.history.push('/Login')
         }
     }, [props.loggedUser]);
 
