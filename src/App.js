@@ -27,7 +27,8 @@ function App(props) {
       <Route path="/Register/" component={RegisterForm}/>
       <Route path ="/Post/" component ={PostListingForm} />
       <Route path ="/Account/" component ={Account} />
-      <Route path = "/ToolList/" component = {ToolList} />    
+      <Route path = "/ToolList/" component = {ToolList} />
+      <Route path = "/Confirmation/" component = {Confirmation} />    
 
      <Footer /> 
 
