@@ -74,6 +74,7 @@ function Home(props) {
 
             <div className="featured-products-categories" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <div className="categories" onClick={() => props.history.push("ToolList/")} style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
                     <Swiper  {...params}>
 
                         {toolCategories.map(e =>

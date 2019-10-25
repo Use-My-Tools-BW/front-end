@@ -105,7 +105,7 @@ function Confirmation(props) {
                 <div className="left-column" style={{ height: '100vh', width: '50%', backgroundColor: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-around', flexDirection: 'column'  }}>
                     <div className="product-image" style={{ width: '50%', height: '25%', backgroundColor: 'none', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}}>
                         {/* below will be where the product image shows  */}
-                        <Card style={{ height: '80%', width: '80%', backgroundColor: 'rgb(245, 247, 234)' }}>
+                        <Card style={{ height: '100%', width: '80%', backgroundColor: 'rgb(245, 247, 234)' }}>
                             <CardContent>
                                 <h3>Tool Image</h3>
                             </CardContent>
@@ -145,7 +145,7 @@ function Confirmation(props) {
                     </div>
                     <div style={{ height: '30%', width: '30%', backgroundColor: 'none', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center'}} >
                         {/* Dollar Amount / Price will replace div below */}
-                        <Card style={{ height: '50%', width: '50%', backgroundColor: 'rgb(245, 247, 234)' }}>
+                        <Card style={{ height: '70%', width: '50%', backgroundColor: 'rgb(245, 247, 234)' }}>
                             <CardContent>
                                 <h3>Total Price</h3>
                                 <h2>$</h2>

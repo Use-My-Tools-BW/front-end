@@ -28,6 +28,7 @@ function App(props) {
       <Route path ="/Post/" component ={PostListingForm} />
       <Route path ="/Account/" component ={Account} />
       <Route path = "/ToolList/" component = {ToolList} />    
+
      <Footer /> 
 
     </div>
