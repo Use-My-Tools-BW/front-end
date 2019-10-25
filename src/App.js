@@ -20,30 +20,14 @@ import Footer from './components/Footer'
 function App(props) {
   return (
     <div className="App">
-      <button onClick={() => console.log(props)}>check store</button>
+      {/* <button onClick={() => console.log(props)}>check store</button> */}
      <NavBar />
-        {/* <Route exact path="/" component={Login}/>
-        <Route exact path="/" component={RegisterForm}/>
-      */}
       <Route exact path="/" component={Home}/>
       <Route  path="/Login/" component={Login}/>
       <Route path="/Register/" component={RegisterForm}/>
       <Route path ="/Post/" component ={PostListingForm} />
       <Route path ="/Account/" component ={Account} />
-      <Route path = "/ToolList/" component = {ToolList} />
-     
-
-     
-
-{/*   
-      <Home />
-      <Login />
-      <RegisterForm />
-      <PostListingForm />
-      <ToolList />
-      <Account />
-      <Confirmation />  */}
-     
+      <Route path = "/ToolList/" component = {ToolList} />    
      <Footer /> 
 
     </div>

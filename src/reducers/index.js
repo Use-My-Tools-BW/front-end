@@ -1,10 +1,10 @@
-import { START_FETCHING, FETCH_LENDPOSTS_SUCCESS, FETCH_ADDNEWUSER_SUCCESS, FETCH_ADDRENTTOOL_SUCCESS, FETCH_CREATELENDPOST_SUCCESS, FETCH_DELETELENDPOST_SUCCESS, FETCH_EDITUSERINFO_SUCCESS, FETCH_RENTEDTOOLS_SUCCESS, FETCH_USERINFO_SUCCESS, FETCH_TOOLLIST_SUCCESS, FETCH_LOGIN_SUCCESS, FETCH_FAILURE } from "../actions"
+import { START_FETCHING, FETCH_LENDPOSTS_SUCCESS, FETCH_ADDRENTALTOOLINACTIVE_SUCCESS, FETCH_ADDNEWUSER_SUCCESS, FETCH_ADDRENTTOOL_SUCCESS, FETCH_CREATELENDPOST_SUCCESS, FETCH_DELETELENDPOST_SUCCESS, FETCH_EDITUSERINFO_SUCCESS, FETCH_RENTEDTOOLS_SUCCESS, FETCH_USERINFO_SUCCESS, FETCH_TOOLLIST_SUCCESS, FETCH_LOGIN_SUCCESS, FETCH_FAILURE } from "../actions"
 
 const initialState = {
     tools: [],
     loggedUser: 0,
-    loggedPostedTools:[{title: "", img_url: "", daily_cost: ""}],
-    loggedRentedTools:[{title: "", img_url: "", daily_cost: ""}],
+    loggedPostedTools:[],
+    loggedRentedTools:[],
     loggedUserInfo: {},
     isFetching: false,
     error: "",
@@ -85,6 +85,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 error: "",
+            }
+        case FETCH_ADDRENTALTOOLINACTIVE_SUCCESS:
+            return{
+                ...state,
+                isFetching: false,
+                error: ""
             }
         case FETCH_FAILURE:
             return {

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import EditListingForm from "../components/forms/EditListingForm"
 import EditAccountForm from "../components/forms/EditAccountForm"
 import PostListingForm from "../components/forms/PostListingForm"
+import ToolPostCard from "./ToolPostCard"
 
 import { axiosWithAuth } from "../components/utils/axiosWithAuth"
 import axios from "axios";
@@ -39,29 +40,16 @@ const params = {
         hide: false
     },
 }
-    function rand() {
-        return Math.round(Math.random() * 20) - 10;
-    }
 
-  function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
-  
   const useStyles = makeStyles(theme => ({
     card: {
-        width: "35%"
+        width: "35%",
+        minWidth: 200,
+        minHeight: '100%'
     },
     paper: {
       position: 'absolute',
       width: 600,
-      height: 250,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -71,12 +59,9 @@ const params = {
 
 
 function Account(props) {
-    const [postedTools, setPostedTools] = useState([])
-    const [rentedTools, setRentedTools] = useState([])
     //Modal Start
+    
     const classes = useStyles();
-
-    const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
     const [openAccount, setOpenAccount] = React.useState(false);
     const [postTool, setPostTool] = React.useState(false);
@@ -100,6 +85,7 @@ function Account(props) {
     setPostTool(false);
     };
 //Model End
+
     useEffect(() => {
         if(props.loggedUser > 0){
         props.fetchLendPosts(props.loggedUser)
@@ -109,7 +95,7 @@ function Account(props) {
         } else{
             props.history.push('/Login')
         }
-    }, [props.loggedUser, props.loggedRentedTools, props.loggedPostedTools]);
+    }, [props.loggedUser]);
 
 
     return(
@@ -122,8 +108,9 @@ function Account(props) {
                             aria-describedby="simple-modal-description"
                             open={openAccount}
                             onClose={handleCloseAccount}
+                            style={{ display: 'flex', justifyContent: 'center' }}
                         >
-                            <div style={modalStyle} className={classes.paper}>
+                            <div className={classes.paper}>
                                 <EditAccountForm loggedUser={props.loggedUser} loggedUserInfo={props.loggedUserInfo} fetchEditUserInformation={props.fetchEditUserInformation}/>
                             </div>
                         </Modal>
@@ -134,8 +121,9 @@ function Account(props) {
                             aria-describedby="simple-modal-description"
                             open={postTool}
                             onClose={handleClosePostTool}
+                            style={{ display: 'flex', justifyContent: 'center' }}
                         >
-                            <div style={modalStyle} className={classes.paper}>
+                            <div className={classes.paper}>
                                 <PostListingForm loggedUser={props.loggedUser} userInfo={props.userInfo} />
                             </div>
                         </Modal>
@@ -151,9 +139,9 @@ function Account(props) {
                                             <img width="25%" src={e.img_url} />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            {e.title}
+                                            {e.title.substring(0,11) + ".."}
                                         </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.total_cost}</p>].map(data => <p>{data}</p>)}</Typography>
                                     </CardContent>
                                     <Modal
                                         aria-labelledby="simple-modal-title"
@@ -161,7 +149,7 @@ function Account(props) {
                                         open={open}
                                         onClose={handleClose}
                                     >
-                                    <div style={modalStyle} className={classes.paper}>
+                                    <div className={classes.paper}>
                                         <EditListingForm tool={e} />
                                     </div>
                                     </Modal>
@@ -174,29 +162,7 @@ function Account(props) {
                     <div className="currently-lending" style={{ width: '80%', height: '40%', backgroundColor: 'red', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#F5F7EA'}}>
                     <Swiper {...params} style={{ height: '100%', width: '90%', backgroundColor: 'green' }}>
                             {props.loggedPostedTools.map(e =>
-                                <Card className={classes.card}>
-                                <CardActionArea>
-                                        <img width="25%" src={e.img_url} />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {e.title}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">{[<p style={{ color: 'green', fontSize: '1.6rem', marginBottom: -20, marginTop: -10 }}>$ {e.daily_cost}</p>].map(data => <p>{data}</p>)}</Typography>
-                                </CardContent>
-                                <Button onClick={handleOpen}>Edit</Button>
-                                <Modal
-                                    aria-labelledby="simple-modal-title"
-                                    aria-describedby="simple-modal-description"
-                                    open={open}
-                                    onClose={handleClose}
-                                >
-                                <div style={modalStyle} className={classes.paper} >
-                                    <EditListingForm tool={e}/>
-                                </div>
-                                </Modal>
-                                <Button onClick={() => props.fetchDeleteLendPost(e.id)}>Delete</Button>
-                                </CardActionArea>
-                            </Card>
+                                <ToolPostCard {...e} fetchDeleteLendPost={props.fetchDeleteLendPost} fetchLendPosts={props.fetchLendPosts} />
                             )}  
                         </Swiper>
                     </div>

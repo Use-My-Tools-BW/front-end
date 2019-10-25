@@ -68,8 +68,7 @@ function Home(props) {
                 <form>
                     {/* handleChange and onSubmit will need to be added */}
                     <h2>Need a tool? See what's available!</h2>
-                    <input type="text"/>
-                    <button type="submit">Search</button>
+                    <Button color="primary" variant="contained" href="/ToolList">Get Started</Button>
                 </form>
             </div>
 

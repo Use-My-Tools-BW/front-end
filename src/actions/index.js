@@ -13,6 +13,7 @@ export const FETCH_CREATELENDPOST_SUCCESS = "FETCH_CREATELENDPOST_SUCCESS";
 export const FETCH_DELETELENDPOST_SUCCESS = "FETCH_DELETELENDPOST_SUCCESS";
 export const FETCH_ADDRENTTOOL_SUCCESS = "FETCH_ADDRENTTOOL_SUCCESS";
 export const FETCH_ADDNEWUSER_SUCCESS = "FETCH_ADDNEWUSER_SUCCESS"
+export const FETCH_ADDRENTALTOOLINACTIVE_SUCCESS = "FETCH_ADDRENTALTOOLINACTIVE_SUCCESS"
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
 export const ADD_TOOL = "ADD_TOOL"
@@ -86,7 +87,7 @@ export const fetchDeleteLendPost = (id) => dispatch => {
 export const fetchAddRentalTool = (cost, toolId, renterId, start, end) => dispatch => {
     axiosWithAuth()
     .post(`https://usemytoolsbw.herokuapp.com/api/rentals`, {start_date: start, end_date: end, total_cost: cost, tool_id: toolId, renter_id: renterId})
-    .then(res => dispatch({ type: FETCH_ADDRENTTOOL_SUCCESS, payload: res.data })& console.log(res.data, "fetchAddRentalTool"))
+    .then(res => dispatch({ type: FETCH_ADDRENTTOOL_SUCCESS })& console.log(res.data, "fetchAddRentalTool"))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }))
 }
 // Used at REGISTERFORM
