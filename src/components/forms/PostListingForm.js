@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: '35%'
+      width: '80%'
     },
     dense: {
       marginTop: theme.spacing(2),
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         marginTop: '2%',
         marginBottom: '4.3%',
-        width: '15%'
+        width: '50%'
     },
     input: {
     display: 'none',
@@ -46,11 +46,11 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1%',
         display: 'flex',
         flexDirection: 'row',
-        width: '35%',
+        width: '100%',
         justifyContent: "space-around"
     },
     DropdownBox: {
-     width: '200px',
+        minWidth: 150
         
     }
   }));
@@ -102,7 +102,6 @@ const changeHandler = event => {
 
 return ( 
     <div>  
-        <button onClick={() => console.log(props)}>View Props</button>
         <h1>Post Your Tools!</h1>
         <form className ={classes.container} onSubmit ={submitHandler}>
           
@@ -188,7 +187,7 @@ return (
             <div className = {classes.DropdownBoxContainer}>
             <FormControl  className={classes.formControl}>
             
-            <InputLabel className ="DropdownLabel">Category</InputLabel>
+            <InputLabel>Category</InputLabel>
             <Select 
                name="category"
                label = "Category"

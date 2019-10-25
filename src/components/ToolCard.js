@@ -60,7 +60,7 @@ function ToolCard(props) {
     <CardActions style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
         <form>
         <input 
-            type = "text"
+            type = "date"
             name="startDate"
             value={date.startDate}
             onChange ={changeHandler}
@@ -68,7 +68,7 @@ function ToolCard(props) {
             required
         />
         <input 
-            type = "text"
+            type = "date"
             name="endDate"
             value={date.endDate}
             onChange ={changeHandler}

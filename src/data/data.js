@@ -305,7 +305,7 @@ export const loggedUser = {
 
 export const toolCategories = [
     {
-        name: "Power Drills",
+        name: "Power Tools",
         class: "iconify",
         dataIcon: "whh:drill",
     },

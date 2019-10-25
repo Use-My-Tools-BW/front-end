@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { classes } from 'istanbul-lib-coverage';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 
 // MaterialUI
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: '20%'
+      width: '80%'
     },
     dense: {
       marginTop: theme.spacing(2),
@@ -87,7 +88,6 @@ export default function EditAccountForm(props){
                 value={userCredentials.first_name}
                 onChange={changeHandler}
                 placeholder="First Name"
-                
                 
                 />
             <TextField 

@@ -68,13 +68,13 @@ function Home(props) {
                 <form>
                     {/* handleChange and onSubmit will need to be added */}
                     <h2>Need a tool? See what's available!</h2>
-                    <input type="text"/>
-                    <button type="submit">Search</button>
+                    <Button color="primary" variant="contained" href="/ToolList">Get Started</Button>
                 </form>
             </div>
 
             <div className="featured-products-categories" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <div className="categories" onClick={() => props.history.push("ToolList/")} style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+                <div className="categories" onClick={() => props.history.push("ToolList/")} style={{ height: '20vh', width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
                     <Swiper  {...params}>
 
                         {toolCategories.map(e =>
